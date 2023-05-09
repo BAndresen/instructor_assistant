@@ -1,0 +1,40 @@
+{
+    "light_theme": {
+        "set_text_color": "#ED2B2A",
+        "reset_main_text_color": "black",
+        "listbox_color": "white",
+        "text_color": "#212121",
+        "background_color": "#FAFAFA",
+        "frame_color": "#E0E0E0",
+        "main_button_color": "#BDBDBD",
+        "main_button_color_hover": "#9E9E9E",
+        "main_button_text_color": "#212121",
+        "switch_on_color": "#9E9E9E",
+        "switch_off_color": "#F5F5F5",
+        "switch_button_color": "#BDBDBD",
+        "switch_hover_color": "#757575",
+        "master_switch_on_color": "#9E9E9E",
+        "master_switch_off_color": "#F5F5F5",
+        "master_switch_button_color": "#6d6d6d",
+        "master_switch_hover_color": "#474747"
+    },
+    "sea_theme": {
+        "set_text_color": "#ED2B2A",
+        "reset_main_text_color": "black",
+        "listbox_color": "white",
+        "text_color": "#212121",
+        "background_color": "#E8F0F2",
+        "frame_color": "#B9DBE6",
+        "main_button_color": "#86A3B8",
+        "main_button_color_hover": "#00F3E4",
+        "main_button_text_color": "#212121",
+        "switch_on_color": "#39A2DB",
+        "switch_off_color": "#B3E8E5",
+        "switch_button_color": "#86A3B8",
+        "switch_hover_color": "#44D9E6",
+        "master_switch_on_color": "#39A2DB",
+        "master_switch_off_color": "#B3E8E5",
+        "master_switch_button_color": "#6d6d6d",
+        "master_switch_hover_color": "#00F3E4"
+    }
+}

@@ -1,0 +1,46 @@
+{
+    "cw_water_list": [
+        "Confined Water 1",
+        "Confined Water 2",
+        "Confined Water 3",
+        "Confined Water 4",
+        "Confined Water 5",
+        "200M Swim",
+        "10min Float",
+        "Equipment Prep",
+        "Disconnect LP Hose",
+        "Loose Cylinder Band",
+        "Weight Remove & Replace",
+        "Emergency Weight Drop",
+        "Skin Diver",
+        "Drysuit Orientation",
+        "All Confined Water Skills"
+    ],
+    "ow_string_list": [
+        "Open Water 1",
+        "Open Water 2",
+        "Open Water 3",
+        "Open Water 4",
+        "Cramp Removal",
+        "Snorkel/Regulator Exchange",
+        "Inflatable Signal Tube",
+        "Emergency Weight Drop",
+        "Surface Swim with Compass",
+        "Tired Diver Tow",
+        "Remove/Replace Scuba",
+        "Remove/Replace Weight",
+        "CESA",
+        "UW Compass Navigation",
+        "All Open Water Dive Flex Skills",
+        "All Certification Requirements"
+    ],
+    "kd_string_list": [
+        "Section 1",
+        "Section 2",
+        "Section 3",
+        "Section 4",
+        "Section 5",
+        "OR Elearning",
+        "All Knowledge Development"
+    ]
+}

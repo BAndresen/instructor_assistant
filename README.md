@@ -48,6 +48,12 @@ The option to import bulk student information is available.  Currently the Instr
 
 For the 'date_of_birth' column data can be in a `datetime` or `string` format.  Use the 'dd/mm/yyyy' format when using strings.  
 
+<div align="center">
+<img src="student_import_example.png">
+
+</div>
+
+
 
 
 

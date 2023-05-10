@@ -46,15 +46,18 @@ The option to import bulk student information is available.  Currently the Instr
 'country'
 ```
 
-For the 'date_of_birth' column data can be in a `datetime` or `string` format.  Use the 'dd/mm/yyyy' format when using strings.  
+For the `date_of_birth` column data can be in either a `datetime` or `string` format.  If using a string format enter date _dd/mm/yyyy_.  
 
 <div align="center">
 <img src="student_import_example.png">
 
 </div>
 
-special thanks to @ryannayang 
+_Note: I have deployed another python script back in my dive shop manager days to parse customer data into the above excel format from a wordpress woocommerce store.  The scripts purpose was to email students with course information and promotional material leading up to and during the course. Please reach out to me if you are interested in a custom solution for something similar <brendan.development@pm.me> _
 
+### Team Teaching Ready
+
+The user interface allows you to easily toggle single or entire sections on or off.  Toggle off the Ocean Dive section with one click for Ocean Referrals for example.  Any item in the off position will be left blank when the `Set Date/Dive` or `Set Instructor` button is clicked.  When team teaching, use this method to separate Instructor teaching assignments and produce a Record and Referral form with multiple Instructors.      
 
 
 

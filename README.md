@@ -53,6 +53,7 @@ For the 'date_of_birth' column data can be in a `datetime` or `string` format.  
 
 </div>
 
+special thanks to @ryannayang 
 
 
 

@@ -1,6 +1,9 @@
 ## Instructor Assistant App
 A tool to help PADI Scuba Diving Instructors complete the 'Record and Referral' form.
-<p> <img src="Record_and_Referral_Form-1.png" width="800" height="618">
+
+<div align="center">
+<img src="Record_and_Referral_Form-1.png" height="400">
+</div>
   
 
 ## Overview
@@ -8,5 +11,8 @@ A tool to help PADI Scuba Diving Instructors complete the 'Record and Referral' 
 <p>https://www.padi.com/about/who-we-are
 
 PADI Scuba Diving Instructors are required to complete the 'Record_and_Referral_Form' for every student after the PADI Open Water Course. The 'Instructor Assistant App' aims to make that process fast and easy. Completing one form takes approximatly 8 - 10mins per student by hand and 1 hour for a class of 6 students. With this tool Instructors should be able to complete paperwork for a full class in less then 5 minutes. 
-
+<div align="center">
 <img src="screengif.gif">
+
+</div>
+  

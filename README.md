@@ -22,7 +22,7 @@ Add, delete and save your instructor details for future use.  After your passwor
 
 ### Team Teaching Ready
 
-The user interface allows you to easily toggle single or entire sections on or off.  Toggle off the Ocean Dive section with one click for Ocean Referrals for example.  Any item in the off position will be left blank when the `Set Date/Dive` or `Set Instructor` button is clicked.  When team teaching, use this method to separate Instructor teaching assignments and produce a Record and Referral form with multiple Instructors.  
+The user interface allows you to easily toggle single or entire sections on or off.  Toggle off the Ocean Dive section with one click for Ocean Referrals for example.  Any item in the off position will be unaffected when the `Set Date/Dive` or `Set Instructor` button is clicked.  When team teaching, use this method to separate Instructor teaching assignments and produce a Record and Referral form with multiple Instructors.  
 
 <br>
 <br>
@@ -34,7 +34,7 @@ The user interface allows you to easily toggle single or entire sections on or o
 
 ### Use Dive Templates
 
-Create and customize templates to complete faster.  Each Instructor has a unique way of conducting the PADI Open Water Course and often repeats parts of the course schedule.  For example, for the Confined Water One dive an Instructor may also complete Knowledge Review Section One, 200m swim and the 10min float on the same day.  Templates allow you to save these matching date pairs so you only need to complete the Confined Water One field date.  After pressing the "Set Template" button the subsequent date pairs will be updated.
+Create and customize templates to complete even faster.  Each Instructor has a unique way of conducting the PADI Open Water Course and often repeats parts of the course schedule.  For example, for the Confined Water One dive an Instructor may also complete Knowledge Review Section One, 200m swim and the 10min float on the same day.  Dive Templates allow you to save these matching date pairs so you only need to complete the Confined Water One field date.  After pressing the "Set Template" button the subsequent date pairs will be updated.
 
 ### Import Student Information
 The option to import bulk student information is available.  Currently the Instructor Assistant App supports imports from an excel file with the following column headings.
@@ -53,14 +53,14 @@ The option to import bulk student information is available.  Currently the Instr
 'country'
 ```
 
-For the `date_of_birth` column data can be in either a `datetime` or `string` format.  If using a string format date *dd/mm/yyyy*.  
+For the `date_of_birth` column data can be in either a `datetime` or `string` format.  If using a string, format date *dd/mm/yyyy*.  
 <br>
 <br>
 <div align="center">
 <img src="student_import_example.png">
 </div>
 
-:point_up: *Note: I deployed a python script when I managed a dive shop to parse customer data into the a similar excel format from a wordpress woocommerce store.  The script's purpose was to email students automatically with course information and promotional material leading up to and during the course. I hope to post something here on github in the future but please reach out to me if you are interested in a custom solution for something similar <brendan.development@pm.me>* :ok_hand:
+:point_up: *Note: I deployed a python script when I managed a dive shop to parse customer data into a similar excel format from a wordpress woocommerce store.  The script ran daily and its purpose was to email students automatically with course information and promotional material leading up to, during and after the course. I hope to post in the future but please reach out to me if you are interested in something similar <brendan.development@pm.me>* :ok_hand:
 
     
 

@@ -8,7 +8,7 @@ Author: Brendan Andresen <brendan.development@pm.me>
 Created: May 6th, 2023
 """
 
-__version__ = "1.0"
+__version__ = "0.1.0"
 
 import datetime
 import os

@@ -1,0 +1,14 @@
+{
+    "Example Instructor": {
+        "PADI Instructor": "Example Instructor",
+        "Initials": "EI",
+        "PADI Number": "123456",
+        "Dive Center": "1234",
+        "Phone": "555-555-5555",
+        "Email": "example_instructor@email.com",
+        "Password": {
+            "Salt": "f4368abca1e3a7c08181",
+            "Hash": "be5b1351831175de5e7855841690da771b28d4f2a60f8743eb0f621b72560f66"
+        }
+    }
+}

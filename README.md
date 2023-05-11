@@ -60,7 +60,6 @@ For the `date_of_birth` column data can be in either a `datetime` or `string` fo
 <img src="student_import_example.png">
 </div>
 
-:point_up: *Note: I wrote a python script when I managed a dive shop to gather and organize customer information from a wordpress woocommerce store.  The script ran daily and its main purpose was to email students automatically with course information and promotional material leading up to, during and after the course. Additionally, it would create course files with student information in excel format ready to be imported by this feature. I hope to develop further and post in the future but please reach out to me if you are interested in something similar <brendan.development@pm.me>* :ok_hand:
 
     
 

@@ -13,9 +13,6 @@ __version__ = "0.1.0"
 import datetime
 import os
 import tkinter
-from tkcalendar import DateEntry
-from fillpdf import fillpdfs
-from tkinter import Toplevel, Menu, messagebox, filedialog, PhotoImage
 import json
 import time
 import hashlib
@@ -24,6 +21,10 @@ import customtkinter  # I modified ctk.entry.py line 388 def get() to only retur
 import pandas
 import configparser
 import webbrowser
+
+from tkcalendar import DateEntry
+from fillpdf import fillpdfs
+from tkinter import Toplevel, Menu, messagebox, filedialog, PhotoImage
 
 # TODO refactor and decouple program
 
@@ -46,10 +47,19 @@ today = datetime.datetime.today()
 
 # --------------------------- THEME --------------------------------- #
 
+# set a default save path for pdf to users desktop
+default_desktop_save_path = os.path.join(os.path.join(os.environ["USERPROFILE"]),"Desktop")
+
 if os.path.exists("config.ini"):
     config = configparser.ConfigParser()
     config.read("config.ini")
     theme = config["style"]["theme"]
+    config["save path"]["student_record_path"] = default_desktop_save_path
+
+    with open("config.ini", "w") as configfile:
+        config.write(configfile)
+
+
 else:
     messagebox.showerror(message="Missing 'config.ini' file")
 

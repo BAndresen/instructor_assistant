@@ -1225,13 +1225,13 @@ def new_student(ui: object):
     student_button.grid(column=2, row=13, columnspan=3, sticky="e", pady=30, padx=30)
 
 
-def update_instructor_menu(instructor_data: dict):
+def update_instructor_menu():
     """update instructor option menu"""
-    # with open("instructor_data.json", "r") as inst:
-    #     instructor_info = json.load(inst)
+    with open("instructor_data.json", "r") as inst:
+        instructor_info = json.load(inst)
     instructor_list_menu = []
 
-    for instructor in instructor_data.keys():
+    for instructor in instructor_info.keys():
         instructor_list_menu.append(instructor)
 
     main_ui.list_box.configure(values=instructor_list_menu)

@@ -10,17 +10,5 @@
             "Salt": "f4368abca1e3a7c08181",
             "Hash": "be5b1351831175de5e7855841690da771b28d4f2a60f8743eb0f621b72560f66"
         }
-    },
-    "": {
-        "PADI Instructor": "",
-        "Initials": "",
-        "PADI Number": "",
-        "Dive Center": "",
-        "Phone": "",
-        "Email": "",
-        "Password": {
-            "Salt": "ffd33296b4e21271770e",
-            "Hash": "678b24052a432c4419407f28124adaea2d4c35fb10278e33d3927131f396dc7e"
-        }
     }
 }

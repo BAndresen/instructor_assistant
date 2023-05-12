@@ -43,6 +43,7 @@ TITLE_HEADER_FONT = ("roboto", "14")
 # Student Information Global Dictionary
 student_dict_global = {}
 
+
 # --------------------------- THEME --------------------------------- #
 
 
@@ -163,14 +164,14 @@ def new_template(ui):
                 cw_entry_list[cw].configure(placeholder_text=cw)
                 cw_switch_list[cw].select()
 
-    kd_reset_swtich = customtkinter.CTkSwitch(template_confined_frame, text="", command=reset,
+    cw_reset_switch = customtkinter.CTkSwitch(template_confined_frame, text="", command=reset,
                                               fg_color=theme.master_switch_off_color,
                                               progress_color=theme.master_switch_on_color,
                                               button_color=theme.master_switch_button_color,
                                               button_hover_color=theme.master_switch_hover_color, )
 
-    kd_reset_swtich.select()
-    kd_reset_swtich.grid(row=0, column=2, pady=(20, 5), padx=(0))
+    cw_reset_switch.select()
+    cw_reset_switch.grid(row=0, column=2, pady=(20, 5), padx=(0))
 
     # create row of switches
     cw_switch_list = []
@@ -235,14 +236,14 @@ def new_template(ui):
                 kd_entry_list[kd].configure(placeholder_text=kd + 15)
                 kd_switch_list[kd].select()
 
-    kd_reset_swtich = customtkinter.CTkSwitch(template_knowledge_frame, text="", command=reset_kd,
+    kd_reset_switch = customtkinter.CTkSwitch(template_knowledge_frame, text="", command=reset_kd,
                                               fg_color=theme.master_switch_off_color,
                                               progress_color=theme.master_switch_on_color,
                                               button_color=theme.master_switch_button_color,
                                               button_hover_color=theme.master_switch_hover_color, )
 
-    kd_reset_swtich.select()
-    kd_reset_swtich.grid(row=0, column=2, pady=(15, 0), padx=(7, 0))
+    kd_reset_switch.select()
+    kd_reset_switch.grid(row=0, column=2, pady=(15, 0), padx=(7, 0))
 
     for n in range(7):
         kd_string = tkinter.Label(template_knowledge_frame, text=knowledge_string_template_list[n],
@@ -342,14 +343,14 @@ def new_template(ui):
                     except AttributeError:
                         pass
 
-    kd_reset_swtich = customtkinter.CTkSwitch(template_open_water, text="", command=reset_ow,
+    ow_reset_switch = customtkinter.CTkSwitch(template_open_water, text="", command=reset_ow,
                                               fg_color=theme.master_switch_off_color,
                                               progress_color=theme.master_switch_on_color,
                                               button_color=theme.master_switch_button_color,
                                               button_hover_color=theme.master_switch_hover_color, )
 
-    kd_reset_swtich.select()
-    kd_reset_swtich.grid(row=0, column=2, )
+    ow_reset_switch.select()
+    ow_reset_switch.grid(row=0, column=2, )
 
     for n in range(16):
         ow_string = tkinter.Label(template_open_water, text=ow_string_list_template[n],
@@ -436,7 +437,8 @@ def new_template(ui):
     computer_switch_set_rule.grid(row=5, column=0, pady=4)
 
     elearning_manual_button = customtkinter.CTkButton(course_option_frame, text="Elearning",
-                                                      fg_color=theme.main_button_color, text_color=theme.main_button_text_color,
+                                                      fg_color=theme.main_button_color,
+                                                      text_color=theme.main_button_text_color,
                                                       hover_color=theme.main_button_color_hover,
                                                       command=elearning
                                                       )
@@ -482,7 +484,8 @@ def new_template(ui):
     date_rule_box_set_rule.grid(row=1, column=0, padx=(15, 0), pady=(0, 20))
 
     delete_rule_button = customtkinter.CTkButton(template_right_frame, text="Delete Template:",
-                                                 fg_color=theme.main_button_color, text_color=theme.main_button_text_color,
+                                                 fg_color=theme.main_button_color,
+                                                 text_color=theme.main_button_text_color,
                                                  hover_color=theme.main_button_color_hover,
                                                  command=lambda: delete_template(date_rule_box_set_rule.get())
                                                  )
@@ -505,16 +508,19 @@ def new_template(ui):
                 "course_option": [],
             }
         }
-
+        cal_index = 0
         for cal in all_cal_entries:
             if cal.get() == "":
                 # .get() returns an empty string if placeholder is left
                 new_data[template_name]["calendar_entries"].append(cal.cget("placeholder_text"))
+                cal_index += 1
             elif cal.get() == "--":
-                pass
+                new_data[template_name]["calendar_entries"].append(cal_index)
+                cal_index += 1
             else:
                 calendar_code = int(cal.get())
                 new_data[template_name]["calendar_entries"].append(calendar_code)
+                cal_index += 1
 
         for switch in all_switches:
             new_data[template_name]["switches"].append(switch.get())
@@ -1130,12 +1136,14 @@ def new_student(ui: object):
                                        background=theme.background_color)
     student_info_label.grid(row=0, column=0, sticky="sw", padx=40)
 
-    student_f_name_label = tkinter.Label(student_frame, text="First Name:", background=theme.frame_color, font=STANDARD_FONT)
+    student_f_name_label = tkinter.Label(student_frame, text="First Name:", background=theme.frame_color,
+                                         font=STANDARD_FONT)
     student_f_name_label.grid(column=0, row=0, sticky="e", pady=(30, 0), padx=2)
     student_f_name_entry = customtkinter.CTkEntry(student_frame, width=30, height=25)
     student_f_name_entry.grid(column=1, row=0, columnspan=3, padx=(0, 30), pady=(30, 2), sticky="ew")
 
-    student_l_name_label = tkinter.Label(student_frame, text="Last Name:", background=theme.frame_color, font=STANDARD_FONT)
+    student_l_name_label = tkinter.Label(student_frame, text="Last Name:", background=theme.frame_color,
+                                         font=STANDARD_FONT)
     student_l_name_label.grid(column=0, row=1, sticky="e", pady=2)
     student_l_name_entry = customtkinter.CTkEntry(student_frame, width=30, height=25)
     student_l_name_entry.grid(column=1, row=1, columnspan=3, padx=(0, 30), pady=(2), sticky="ew")
@@ -1163,7 +1171,8 @@ def new_student(ui: object):
     sex_radio_female = tkinter.Radiobutton(student_frame, text="Female", variable=sex_check_var, value=2,
                                            background=theme.frame_color, font=STANDARD_FONT)
     sex_radio_female.grid(row=6, column=1, sticky="w", padx=(10, 0))
-    mailing_label = tkinter.Label(student_frame, text="Mailing Address", background=theme.frame_color, font=STANDARD_FONT)
+    mailing_label = tkinter.Label(student_frame, text="Mailing Address", background=theme.frame_color,
+                                  font=STANDARD_FONT)
     mailing_label.grid(row=7, column=0, sticky="e", pady=(20, 5))
     street_label = tkinter.Label(student_frame, text="Street:", background=theme.frame_color, font=STANDARD_FONT)
     street_label.grid(row=8, column=0, sticky="e", pady=2)
@@ -1264,7 +1273,8 @@ def new_instructor(ui):
     initials_label.grid(column=0, row=1, sticky="e", pady=2)
     initials_entry = customtkinter.CTkEntry(instructor_frame, height=25)
     initials_entry.grid(column=1, row=1, sticky="ew", pady=2)
-    padi_number_label = tkinter.Label(instructor_frame, text="PADI Number:", font=STANDARD_FONT, background=theme.frame_color)
+    padi_number_label = tkinter.Label(instructor_frame, text="PADI Number:", font=STANDARD_FONT,
+                                      background=theme.frame_color)
     padi_number_label.grid(row=3, column=0, sticky="e", pady=2)
     padi_number_entry = customtkinter.CTkEntry(instructor_frame, height=25)
     padi_number_entry.grid(row=3, column=1, sticky="ew", pady=2)
@@ -1277,7 +1287,8 @@ def new_instructor(ui):
     phone_label.grid(row=5, column=0, sticky="e", pady=2)
     phone_entry = customtkinter.CTkEntry(instructor_frame, height=25)
     phone_entry.grid(row=5, column=1, columnspan=2, sticky="ew", pady=2)
-    instructor_email_label = tkinter.Label(instructor_frame, text="Email:", font=STANDARD_FONT, background=theme.frame_color)
+    instructor_email_label = tkinter.Label(instructor_frame, text="Email:", font=STANDARD_FONT,
+                                           background=theme.frame_color)
     instructor_email_label.grid(row=6, column=0, sticky="e", pady=2)
     instructor_email_entry = customtkinter.CTkEntry(instructor_frame, height=25)
     instructor_email_entry.grid(row=6, column=1, columnspan=2, sticky="ew", pady=2)
@@ -1340,7 +1351,8 @@ def new_instructor(ui):
     password_switch.grid(row=7, column=3, sticky="ew", padx=(5, 20))
 
     # --- Add Instructor Button
-    instructor_button = customtkinter.CTkButton(instructor_frame, text="Add Instructor", fg_color=theme.main_button_color,
+    instructor_button = customtkinter.CTkButton(instructor_frame, text="Add Instructor",
+                                                fg_color=theme.main_button_color,
                                                 text_color=theme.main_button_text_color,
                                                 hover_color=theme.main_button_color_hover,
                                                 command=update_instructor)
@@ -1547,9 +1559,12 @@ def reset_all():
     [set_date.configure(text="Set Date", fg=theme.reset_main_text_color) for set_date in main_ui.cw_set_date_list]
     [set_date.configure(text="Set Date", fg=theme.reset_main_text_color) for set_date in main_ui.kd_set_date_list]
     [set_date.configure(text="Set Date", fg=theme.reset_main_text_color) for set_date in main_ui.ow_set_date_list]
-    [set_inst.configure(text="Set Instructor", fg=theme.reset_main_text_color) for set_inst in main_ui.cw_set_instructor_list]
-    [set_inst.configure(text="Set Instructor", fg=theme.reset_main_text_color) for set_inst in main_ui.kd_set_instructor_list]
-    [set_inst.configure(text="Set Instructor", fg=theme.reset_main_text_color) for set_inst in main_ui.ow_set_instructor_list]
+    [set_inst.configure(text="Set Instructor", fg=theme.reset_main_text_color) for set_inst in
+     main_ui.cw_set_instructor_list]
+    [set_inst.configure(text="Set Instructor", fg=theme.reset_main_text_color) for set_inst in
+     main_ui.kd_set_instructor_list]
+    [set_inst.configure(text="Set Instructor", fg=theme.reset_main_text_color) for set_inst in
+     main_ui.ow_set_instructor_list]
     [quiz.delete(0, "end") for quiz in main_ui.kd_exam_entry_list]
     [flex.delete(0, "end") for flex in main_ui.ow_flex_dive_list]
     [flex.configure(placeholder_text="") for flex in main_ui.ow_flex_dive_list]
@@ -1605,17 +1620,20 @@ class MainUI(customtkinter.CTk):
         self.list_box_student.grid(row=1, column=0, rowspan=3, columnspan=2, padx=(20, 30), pady=(10, 0), sticky="ew")
         self.add_student = customtkinter.CTkButton(self.student_lb_frame, text="Add Student",
                                                    command=lambda: new_student(self),
-                                                   fg_color=theme.main_button_color, text_color=theme.main_button_text_color,
+                                                   fg_color=theme.main_button_color,
+                                                   text_color=theme.main_button_text_color,
                                                    hover_color=theme.main_button_color_hover)
         self.add_student.grid(row=1, column=2, padx=(0, 30))
         self.set_student = customtkinter.CTkButton(self.student_lb_frame, text="Set Student",
                                                    command=set_student,
-                                                   fg_color=theme.main_button_color, text_color=theme.main_button_text_color,
+                                                   fg_color=theme.main_button_color,
+                                                   text_color=theme.main_button_text_color,
                                                    hover_color=theme.main_button_color_hover)
         self.set_student.grid(row=2, column=2, padx=(0, 30))
         self.import_student = customtkinter.CTkButton(self.student_lb_frame, text="Import Student",
                                                       command=import_student,
-                                                      fg_color=theme.main_button_color, text_color=theme.main_button_text_color,
+                                                      fg_color=theme.main_button_color,
+                                                      text_color=theme.main_button_text_color,
                                                       hover_color=theme.main_button_color_hover)
         self.import_student.grid(row=3, column=2, padx=(0, 30))
 
@@ -1648,17 +1666,20 @@ class MainUI(customtkinter.CTk):
         self.list_box.grid(row=0, column=1, padx=(0, 80), pady=20)
         self.add_inst_button = customtkinter.CTkButton(self.instructor_lb_frame, text="Add Instructor",
                                                        command=lambda: new_instructor(self),
-                                                       fg_color=theme.main_button_color, text_color=theme.main_button_text_color,
+                                                       fg_color=theme.main_button_color,
+                                                       text_color=theme.main_button_text_color,
                                                        hover_color=theme.main_button_color_hover)
         self.add_inst_button.grid(row=0, column=2, padx=(0, 30))
         self.set_inst_button = customtkinter.CTkButton(self.instructor_lb_frame, text="Set Instructor",
-                                                       command= lambda :set_instructor(self),
-                                                       fg_color=theme.main_button_color, text_color=theme.main_button_text_color,
+                                                       command=lambda: set_instructor(self),
+                                                       fg_color=theme.main_button_color,
+                                                       text_color=theme.main_button_text_color,
                                                        hover_color=theme.main_button_color_hover)
         self.set_inst_button.grid(row=1, column=1, padx=(0, 80))
         self.del_inst_button = customtkinter.CTkButton(self.instructor_lb_frame, text="Delete Instructor",
                                                        command=lambda: remove_inst(self.list_box.get()),
-                                                       fg_color=theme.main_button_color, text_color=theme.main_button_text_color,
+                                                       fg_color=theme.main_button_color,
+                                                       text_color=theme.main_button_text_color,
                                                        hover_color=theme.main_button_color_hover)
         self.del_inst_button.grid(row=1, column=2, padx=(0, 30))
 
@@ -1669,7 +1690,7 @@ class MainUI(customtkinter.CTk):
         self.confined_water_frame.grid(column=0, row=2, padx=10, pady=10, sticky="nsew", ipadx=10, ipady=10)
 
         self.main_switch_cw = customtkinter.CTkSwitch(self.confined_water_frame, text="",
-                                                      command= select_all_cw,
+                                                      command=select_all_cw,
                                                       fg_color=theme.master_switch_off_color,
                                                       progress_color=theme.master_switch_on_color,
                                                       button_hover_color=theme.master_switch_hover_color,
@@ -1678,7 +1699,8 @@ class MainUI(customtkinter.CTk):
         self.main_switch_cw.grid(row=0, column=3, columnspan=2, stick="w")
 
         # Confined Water Labels
-        self.confined_water_section = tkinter.Label(self.confined_water_frame, text="Confined Water", bg=theme.frame_color,
+        self.confined_water_section = tkinter.Label(self.confined_water_frame, text="Confined Water",
+                                                    bg=theme.frame_color,
                                                     font=TITLE_HEADER_FONT)
         self.confined_water_section.grid(row=0, column=0, pady=10)
 
@@ -1705,7 +1727,8 @@ class MainUI(customtkinter.CTk):
         # Confined Water Set Date Labels
         self.cw_set_date_list = []
         for cw_date in range(15):
-            cw_set_date = tkinter.Label(self.confined_water_frame, text="Set Date", bg=theme.frame_color, font=STANDARD_FONT)
+            cw_set_date = tkinter.Label(self.confined_water_frame, text="Set Date", bg=theme.frame_color,
+                                        font=STANDARD_FONT)
             cw_set_date.grid(row=cw_date + 1, column=4, padx=(0, 20))
             self.cw_set_date_list.append(cw_set_date)
 
@@ -1909,7 +1932,8 @@ class MainUI(customtkinter.CTk):
         # Knowledge Development Set Date Labels
         self.ow_set_date_list = []
         for ow_date in range(16):
-            ow_set_date = tkinter.Label(self.open_water_frame, text="Set Date", bg=theme.frame_color, font=STANDARD_FONT)
+            ow_set_date = tkinter.Label(self.open_water_frame, text="Set Date", bg=theme.frame_color,
+                                        font=STANDARD_FONT)
             ow_set_date.grid(row=ow_date + 1, column=4)
             self.ow_set_date_list.append(ow_set_date)
 
@@ -1970,7 +1994,7 @@ class MainUI(customtkinter.CTk):
         self.set_date_rule_button.grid(row=2, column=0, pady=(5, 10))
 
         self.set_date_button = customtkinter.CTkButton(self.right_frame, text="New Template",
-                                                       command=lambda :new_template(self),
+                                                       command=lambda: new_template(self),
                                                        fg_color=theme.main_button_color,
                                                        text_color=theme.main_button_text_color,
                                                        hover_color=theme.main_button_color_hover)
@@ -1985,25 +2009,29 @@ class MainUI(customtkinter.CTk):
 
         self.refresh_main = customtkinter.CTkButton(master=self.right_frame, text="Reset All",
                                                     command=reset_all,
-                                                    fg_color=theme.main_button_color, text_color=theme.main_button_text_color,
+                                                    fg_color=theme.main_button_color,
+                                                    text_color=theme.main_button_text_color,
                                                     hover_color=theme.main_button_color_hover)
         self.refresh_main.grid(row=5, column=0, pady=(0, 10))
 
         self.select_all_button = customtkinter.CTkButton(master=self.right_frame, text="Unselect All",
                                                          command=select_all,
-                                                         fg_color=theme.main_button_color, text_color=theme.main_button_text_color,
+                                                         fg_color=theme.main_button_color,
+                                                         text_color=theme.main_button_text_color,
                                                          hover_color=theme.main_button_color_hover)
         self.select_all_button.grid(row=6, column=0, pady=(0, 10))
 
         self.select_elearning_button = customtkinter.CTkButton(master=self.right_frame, text="Elearning",
-                                                               command=or_elearning_select, fg_color=theme.main_button_color,
+                                                               command=or_elearning_select,
+                                                               fg_color=theme.main_button_color,
                                                                text_color=theme.main_button_text_color,
                                                                hover_color=theme.main_button_color_hover)
         self.select_elearning_button.grid(row=7, column=0, pady=(0, 70))
 
         self.gen_pfd_button = customtkinter.CTkButton(self.right_frame, text="Generate PDF",
-                                                      command=lambda :generate_pdf(STUDENT_AND_REFERRAL_FORM),
-                                                      fg_color=theme.main_button_color, text_color=theme.main_button_text_color,
+                                                      command=lambda: generate_pdf(STUDENT_AND_REFERRAL_FORM),
+                                                      fg_color=theme.main_button_color,
+                                                      text_color=theme.main_button_text_color,
                                                       hover_color=theme.main_button_color_hover)
         self.gen_pfd_button.grid(row=8, column=0)
 
@@ -2047,7 +2075,6 @@ class MainUI(customtkinter.CTk):
 
 
 if __name__ == "__main__":
-
     with open("config/themes.json", "r") as file:
         theme_dict = json.load(file)
     # Configure file path for completed pdf

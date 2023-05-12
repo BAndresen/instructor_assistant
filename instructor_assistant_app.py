@@ -2042,7 +2042,7 @@ class MainUI(customtkinter.CTk):
         self.file = Menu(self.menubar, tearoff=0)
         self.menubar.add_cascade(label='File', menu=self.file)
         self.file.add_command(label='Start New',
-                              # command=reset_all
+                              command=reset_all
                               )
         self.file.add_separator()
         self.file.add_command(label='Exit', command=self.destroy)
@@ -2050,10 +2050,10 @@ class MainUI(customtkinter.CTk):
         self.edit = Menu(self.menubar, tearoff=0)
         self.menubar.add_cascade(label='Edit', menu=self.edit)
         self.edit.add_command(label='Choose PDF Save Path',
-                              # command=choose_save_path
+                              command=choose_save_path
                               )
         self.edit.add_command(label='New Template',
-                              # command=new_template
+                              command=new_template
                               )
         # - add themes in future
         # --- Settings
@@ -2079,11 +2079,14 @@ if __name__ == "__main__":
         theme_dict = json.load(file)
     # Configure file path for completed pdf
 
-    default_desktop_save_path = os.path.join(os.path.join(os.environ["USERPROFILE"]), "Desktop")
     config = configparser.ConfigParser()
     config.read("config/config.ini")
     config_theme = config["style"]["theme"]
-    config["save path"]["student_record_path"] = default_desktop_save_path
+
+    if config["new_user"].getboolean("new_user"):
+        default_desktop_save_path = os.path.join(os.path.join(os.environ["USERPROFILE"]), "Desktop")
+        config["save path"]["student_record_path"] = default_desktop_save_path
+        config["new_user"]["new_user"] = "False"
 
     with open("config/config.ini", "w") as configfile:
         config.write(configfile)

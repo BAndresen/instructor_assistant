@@ -28,24 +28,21 @@ from tkinter import Toplevel, Menu, messagebox, filedialog, PhotoImage
 
 # TODO refactor and decouple program
 
-# Import UI label lists
-if not os.path.exists("gui_setup_labels.json"):
-    messagebox.showerror(message="missing configuration file 'gui_setup_labels.json")
-else:
-    with open("gui_setup_labels.json", "r") as data:
-        date_file = json.load(data)
-        cw_label_list = date_file["cw_water_list"]
-        kd_string_list = date_file["kd_string_list"]
-        ow_string_list = date_file["ow_string_list"]
-
-if os.path.exists("Record_and_Referral_Form.pdf"):
-    fields = fillpdfs.get_form_fields("Record_and_Referral_Form.pdf")
-else:
-    messagebox.showerror(message="Missing 'Record_and_Referral_Form.pdf'")
-
+# Datetime
 today = datetime.datetime.today()
 
-# --------------------------- THEME --------------------------------- #
+# Constants
+UI_SETUP_LABELS = "ui_setup_labels.json"
+with open(UI_SETUP_LABELS, "r") as file:
+    data = json.load(file)
+
+CONFINED_WATER_LABELS = data["cw_water_list"]
+KNOWLEDGE_DEVELOPMENT_LABELS = data["kd_string_list"]
+OPEN_WATER_LABELS = data["ow_string_list"]
+STUDENT_AND_REFERRAL_FORM = "Record_and_Referral_Form.pdf"
+STANDARD_FONT = ("roboto", "10")
+TITLE_HEADER_FONT = ("roboto", "14")
+
 
 # set a default save path for pdf to users desktop
 default_desktop_save_path = os.path.join(os.path.join(os.environ["USERPROFILE"]),"Desktop")
@@ -58,6 +55,10 @@ if os.path.exists("config.ini"):
 
     with open("config.ini", "w") as configfile:
         config.write(configfile)
+
+
+# --------------------------- THEME --------------------------------- #
+
 
 
 else:
@@ -89,8 +90,8 @@ else:
 # theme constants
 student_listbox_height = 9
 instructor_listbox_height = 7
-font = ("roboto", "10")
-header = ("roboto", "14")
+STANDARD_FONT = ("roboto", "10")
+TITLE_HEADER_FONT = ("roboto", "14")
 
 # Student Information Global Dictionary
 student_dict_global = {}
@@ -146,7 +147,7 @@ def new_template():
     template_title_frame.grid(row=0, column=0, padx=10, pady=10, stick="nsew")
     template_name_entry = customtkinter.CTkEntry(template_title_frame, width=200, height=30)
     template_name_entry.grid(column=1, row=0, pady=20, sticky="w")
-    template_name_label = tkinter.Label(template_title_frame, text="Template Name:", font=header,
+    template_name_label = tkinter.Label(template_title_frame, text="Template Name:", font=TITLE_HEADER_FONT,
                                         background=frame_color)
     template_name_label.grid(column=0, row=0, pady=20, padx=(20, 10))
 
@@ -175,11 +176,11 @@ def new_template():
 
     for i in range(15):
         string = tkinter.Label(template_confined_frame, text=confined_water_string_template_list[i],
-                               font=font, background=frame_color)
+                               font=STANDARD_FONT, background=frame_color)
         string.grid(row=i + 1, column=0, sticky="e", padx=(20, 5))
         confined_water_string_template_list.append(string)
 
-    confined_water_section_set_rule = tkinter.Label(template_confined_frame, text="Confined Water", font=header,
+    confined_water_section_set_rule = tkinter.Label(template_confined_frame, text="Confined Water", font=TITLE_HEADER_FONT,
                                                     background=frame_color)
     confined_water_section_set_rule.grid(row=0, column=0, sticky="w", padx=(20, 0), pady=(10, 0))
 
@@ -237,9 +238,9 @@ def new_template():
     template_knowledge_frame = customtkinter.CTkFrame(new_template_window, fg_color=frame_color)
     template_knowledge_frame.grid(row=0, column=1, ipadx=10, ipady=10, padx=10, pady=10, sticky="nsew")
     knowledge_development_title = tkinter.Label(template_knowledge_frame, text="Knowledge Development",
-                                                font=header, background=frame_color)
+                                                font=TITLE_HEADER_FONT, background=frame_color)
     knowledge_development_title.grid(row=0, column=0, padx=20, pady=(20, 0))
-    pass_exam_set_rule = tkinter.Label(template_knowledge_frame, text="Quiz/Exam", font=font, background=frame_color)
+    pass_exam_set_rule = tkinter.Label(template_knowledge_frame, text="Quiz/Exam", font=STANDARD_FONT, background=frame_color)
     pass_exam_set_rule.grid(row=0, column=3, columnspan=1, pady=(20, 0), padx=(0, 20))
 
     knowledge_string_template_list = [
@@ -283,7 +284,7 @@ def new_template():
 
     for n in range(7):
         kd_string = tkinter.Label(template_knowledge_frame, text=knowledge_string_template_list[n],
-                                  font=font, background=frame_color)
+                                  font=STANDARD_FONT, background=frame_color)
         kd_string.grid(row=n + 1, column=0, padx=(33, 5), sticky="e")
 
     for i in range(7):
@@ -321,7 +322,7 @@ def new_template():
     template_open_water.grid(row=1, column=1, ipadx=10, ipady=10, padx=10, pady=10, sticky="nsew")
 
     # --- Open Water Dives Labels - Set Rule Window
-    ow_dives_label_set_rule = tkinter.Label(template_open_water, text="Open Water Dives", font=header,
+    ow_dives_label_set_rule = tkinter.Label(template_open_water, text="Open Water Dives", font=TITLE_HEADER_FONT,
                                             background=frame_color)
     ow_dives_label_set_rule.grid(row=0, column=0, pady=(10, 0), padx=(0, 10))
 
@@ -390,7 +391,7 @@ def new_template():
 
     for n in range(16):
         ow_string = tkinter.Label(template_open_water, text=ow_string_list_template[n],
-                                  font=font, background=frame_color)
+                                  font=STANDARD_FONT, background=frame_color)
         ow_string.grid(row=n + 1, column=0, padx=(20, 5), sticky="e")
 
     ow_switch_list = []
@@ -446,7 +447,7 @@ def new_template():
     course_option_frame = customtkinter.CTkFrame(new_template_window, fg_color=frame_color)
     course_option_frame.grid(row=0, column=2, padx=10, pady=10, sticky="nsew")
 
-    course_option_label_set_rule = tkinter.Label(course_option_frame, text="Course Option:", font=header,
+    course_option_label_set_rule = tkinter.Label(course_option_frame, text="Course Option:", font=TITLE_HEADER_FONT,
                                                  background=frame_color)
     course_option_label_set_rule.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
     rdp_table_switch_set_rule = customtkinter.CTkSwitch(course_option_frame, text="RDP Table",
@@ -497,7 +498,7 @@ def new_template():
         date_rule_box.set("")
         date_rule_box.configure(values=temp)
 
-    delete_label = tkinter.Label(template_right_frame, text="Delete Template", font=font, background=frame_color)
+    delete_label = tkinter.Label(template_right_frame, text="Delete Template", font=STANDARD_FONT, background=frame_color)
     delete_label.grid(row=0, column=0, pady=(20, 5))
 
     try:
@@ -670,7 +671,7 @@ def set_instructor():
     pass_frame = customtkinter.CTkFrame(pass_window, fg_color=frame_color)
     pass_frame.grid(row=1, column=0, sticky="nsew")
     pass_frame.grid_columnconfigure(0, weight=1)
-    pass_label = tkinter.Label(pass_window, text="Verify Instructor Password", font=header, background=background_color)
+    pass_label = tkinter.Label(pass_window, text="Verify Instructor Password", font=TITLE_HEADER_FONT, background=background_color)
     pass_label.grid(column=0, row=0, sticky="w")
     pass_entry = customtkinter.CTkEntry(pass_frame, show="*")
     pass_entry.grid(column=0, row=0, pady=10, padx=10, sticky="ew")
@@ -1165,62 +1166,62 @@ def new_student():
     student_frame.grid_columnconfigure(2, weight=1)
     student_frame.grid_columnconfigure(0, weight=1)
     student_frame.grid_columnconfigure(1, weight=1)
-    student_info_label = tkinter.Label(student_window, text="Add Student Information", font=header,
+    student_info_label = tkinter.Label(student_window, text="Add Student Information", font=TITLE_HEADER_FONT,
                                        background=background_color)
     student_info_label.grid(row=0, column=0, sticky="sw", padx=40)
 
-    student_f_name_label = tkinter.Label(student_frame, text="First Name:", background=frame_color, font=font)
+    student_f_name_label = tkinter.Label(student_frame, text="First Name:", background=frame_color, font=STANDARD_FONT)
     student_f_name_label.grid(column=0, row=0, sticky="e", pady=(30, 0), padx=2)
     student_f_name_entry = customtkinter.CTkEntry(student_frame, width=30, height=25)
     student_f_name_entry.grid(column=1, row=0, columnspan=3, padx=(0, 30), pady=(30, 2), sticky="ew")
 
-    student_l_name_label = tkinter.Label(student_frame, text="Last Name:", background=frame_color, font=font)
+    student_l_name_label = tkinter.Label(student_frame, text="Last Name:", background=frame_color, font=STANDARD_FONT)
     student_l_name_label.grid(column=0, row=1, sticky="e", pady=2)
     student_l_name_entry = customtkinter.CTkEntry(student_frame, width=30, height=25)
     student_l_name_entry.grid(column=1, row=1, columnspan=3, padx=(0, 30), pady=(2), sticky="ew")
 
-    dob_label = tkinter.Label(student_frame, text="DOB: (DD/MM/YYYY)", background=frame_color, font=font)
+    dob_label = tkinter.Label(student_frame, text="DOB: (DD/MM/YYYY)", background=frame_color, font=STANDARD_FONT)
     dob_label.grid(column=0, row=2, sticky="e", padx=(30, 0))
     dob_entry = customtkinter.CTkEntry(student_frame, width=15, height=25)
     dob_entry.grid(column=1, row=2, sticky="ew", pady=2)
 
-    student_email_label = tkinter.Label(student_frame, text="Email:", background=frame_color, font=font)
+    student_email_label = tkinter.Label(student_frame, text="Email:", background=frame_color, font=STANDARD_FONT)
     student_email_label.grid(row=3, column=0, sticky="e")
     student_email_entry = customtkinter.CTkEntry(student_frame, width=30, height=25)
     student_email_entry.grid(row=3, column=1, columnspan=3, sticky="ew", padx=(0, 30), pady=2)
-    student_phone_label = tkinter.Label(student_frame, text="Phone:", background=frame_color, font=font)
+    student_phone_label = tkinter.Label(student_frame, text="Phone:", background=frame_color, font=STANDARD_FONT)
     student_phone_label.grid(row=4, column=0, sticky="e", pady=5)
     student_phone_entry = customtkinter.CTkEntry(student_frame, width=30, height=25)
     student_phone_entry.grid(row=4, column=1, columnspan=3, padx=(0, 30), sticky="ew")
 
-    sex_label = tkinter.Label(student_frame, text="Sex", padx=1, background=frame_color, font=font)
+    sex_label = tkinter.Label(student_frame, text="Sex", padx=1, background=frame_color, font=STANDARD_FONT)
     sex_label.grid(row=5, column=0, sticky="e")
     sex_check_var = tkinter.IntVar()
     sex_radio_male = tkinter.Radiobutton(student_frame, text="Male", variable=sex_check_var, value=1,
-                                         background=frame_color, font=font)
+                                         background=frame_color, font=STANDARD_FONT)
     sex_radio_male.grid(row=5, column=1, sticky="w", padx=(10, 0))
     sex_radio_female = tkinter.Radiobutton(student_frame, text="Female", variable=sex_check_var, value=2,
-                                           background=frame_color, font=font)
+                                           background=frame_color, font=STANDARD_FONT)
     sex_radio_female.grid(row=6, column=1, sticky="w", padx=(10, 0))
-    mailing_label = tkinter.Label(student_frame, text="Mailing Address", background=frame_color, font=font)
+    mailing_label = tkinter.Label(student_frame, text="Mailing Address", background=frame_color, font=STANDARD_FONT)
     mailing_label.grid(row=7, column=0, sticky="e", pady=(20, 5))
-    street_label = tkinter.Label(student_frame, text="Street:", background=frame_color, font=font)
+    street_label = tkinter.Label(student_frame, text="Street:", background=frame_color, font=STANDARD_FONT)
     street_label.grid(row=8, column=0, sticky="e", pady=2)
     street_entry = customtkinter.CTkEntry(student_frame, width=30, height=25)
     street_entry.grid(row=8, column=1, columnspan=3, padx=(0, 30), sticky="ew", pady=2)
-    city_label = tkinter.Label(student_frame, text="City:", background=frame_color, font=font)
+    city_label = tkinter.Label(student_frame, text="City:", background=frame_color, font=STANDARD_FONT)
     city_label.grid(row=9, column=0, sticky="e")
     city_entry = customtkinter.CTkEntry(student_frame, height=25)
     city_entry.grid(row=9, column=1, sticky="ew", pady=2)
-    province_label = tkinter.Label(student_frame, text="Province:", background=frame_color, font=font)
+    province_label = tkinter.Label(student_frame, text="Province:", background=frame_color, font=STANDARD_FONT)
     province_label.grid(row=10, column=0, sticky="e")
     province_entry = customtkinter.CTkEntry(student_frame, height=25)
     province_entry.grid(row=10, column=1, sticky="ew", pady=2)
-    country_label = tkinter.Label(student_frame, text="Country:", background=frame_color, font=font)
+    country_label = tkinter.Label(student_frame, text="Country:", background=frame_color, font=STANDARD_FONT)
     country_label.grid(row=11, column=0, sticky="e")
     country_entry = customtkinter.CTkEntry(student_frame, height=25)
     country_entry.grid(row=11, column=1, sticky="ew", pady=2)
-    postal_label = tkinter.Label(student_frame, text="Postal:", background=frame_color, font=font)
+    postal_label = tkinter.Label(student_frame, text="Postal:", background=frame_color, font=STANDARD_FONT)
     postal_label.grid(row=12, column=0, sticky="e")
     postal_entry = customtkinter.CTkEntry(student_frame, height=25)
     postal_entry.grid(row=12, column=1, sticky="ew", pady=2)
@@ -1286,7 +1287,7 @@ def new_instructor():
     instructor_window.config(pady=50, padx=50, background=background_color)
     instructor_window.grid_columnconfigure(0, weight=1)
 
-    add_instructor_label = tkinter.Label(instructor_window, text="Add Instructor", font=header,
+    add_instructor_label = tkinter.Label(instructor_window, text="Add Instructor", font=TITLE_HEADER_FONT,
                                          background=background_color)
     add_instructor_label.grid(row=0, column=0, sticky="w", padx=10)
 
@@ -1294,32 +1295,32 @@ def new_instructor():
     instructor_frame.grid(row=1, column=0, ipadx=20)
     instructor_frame.grid_columnconfigure(0, weight=1)
 
-    instructor_name_label = tkinter.Label(instructor_frame, text="PADI Instructor:", font=font, background=frame_color)
+    instructor_name_label = tkinter.Label(instructor_frame, text="PADI Instructor:", font=STANDARD_FONT, background=frame_color)
     instructor_name_label.grid(column=0, row=0, sticky="e", pady=(20, 2))
     instructor_name_entry = customtkinter.CTkEntry(instructor_frame, height=25)
     instructor_name_entry.grid(column=1, row=0, columnspan=2, sticky="ew", pady=(20, 2))
-    initials_label = tkinter.Label(instructor_frame, text="Initials", font=font, background=frame_color)
+    initials_label = tkinter.Label(instructor_frame, text="Initials", font=STANDARD_FONT, background=frame_color)
     initials_label.grid(column=0, row=1, sticky="e", pady=2)
     initials_entry = customtkinter.CTkEntry(instructor_frame, height=25)
     initials_entry.grid(column=1, row=1, sticky="ew", pady=2)
-    padi_number_label = tkinter.Label(instructor_frame, text="PADI Number:", font=font, background=frame_color)
+    padi_number_label = tkinter.Label(instructor_frame, text="PADI Number:", font=STANDARD_FONT, background=frame_color)
     padi_number_label.grid(row=3, column=0, sticky="e", pady=2)
     padi_number_entry = customtkinter.CTkEntry(instructor_frame, height=25)
     padi_number_entry.grid(row=3, column=1, sticky="ew", pady=2)
-    store_number_label = tkinter.Label(instructor_frame, text="PADI Store Number s-:", font=font,
+    store_number_label = tkinter.Label(instructor_frame, text="PADI Store Number s-:", font=STANDARD_FONT,
                                        background=frame_color)
     store_number_label.grid(row=4, column=0, sticky="e", pady=2)
     store_number_entry = customtkinter.CTkEntry(instructor_frame, height=25)
     store_number_entry.grid(row=4, column=1, sticky="ew", pady=2)
-    phone_label = tkinter.Label(instructor_frame, text="Phone:", font=font, background=frame_color)
+    phone_label = tkinter.Label(instructor_frame, text="Phone:", font=STANDARD_FONT, background=frame_color)
     phone_label.grid(row=5, column=0, sticky="e", pady=2)
     phone_entry = customtkinter.CTkEntry(instructor_frame, height=25)
     phone_entry.grid(row=5, column=1, columnspan=2, sticky="ew", pady=2)
-    instructor_email_label = tkinter.Label(instructor_frame, text="Email:", font=font, background=frame_color)
+    instructor_email_label = tkinter.Label(instructor_frame, text="Email:", font=STANDARD_FONT, background=frame_color)
     instructor_email_label.grid(row=6, column=0, sticky="e", pady=2)
     instructor_email_entry = customtkinter.CTkEntry(instructor_frame, height=25)
     instructor_email_entry.grid(row=6, column=1, columnspan=2, sticky="ew", pady=2)
-    instructor_password_label = tkinter.Label(instructor_frame, text="Password:", font=font, background=frame_color)
+    instructor_password_label = tkinter.Label(instructor_frame, text="Password:", font=STANDARD_FONT, background=frame_color)
     instructor_password_label.grid(row=7, column=0, sticky="e", pady=2)
     instructor_password_entry = customtkinter.CTkEntry(instructor_frame, show="*", height=25)
     instructor_password_entry.grid(row=7, column=1, columnspan=2, sticky="ew", pady=2)
@@ -1604,7 +1605,7 @@ def reset_all():
     [cw_dates.set_date(today) for cw_dates in cw_cal_list]
     [kd_dates.set_date(today) for kd_dates in kd_cal_list]
     [ow_dates.set_date(today) for ow_dates in ow_cal_list]
-    student_set_label.config(text="Set Student", font=header, background=frame_color, fg=reset_main_text_color)
+    student_set_label.config(text="Set Student", font=TITLE_HEADER_FONT, background=frame_color, fg=reset_main_text_color)
     clear_dict_values()
 
 
@@ -1633,12 +1634,12 @@ student_lb_frame = customtkinter.CTkFrame(master=window, fg_color=frame_color, c
                                           bg_color=background_color)
 student_lb_frame.grid(row=0, column=0, pady=10, ipadx=10, ipady=10, sticky="nsew", padx=10)
 student_lb_frame.grid_columnconfigure(0, weight=1)
-student_label = tkinter.Label(student_lb_frame, text="Student Diver:", bg=frame_color, font=header)
+student_label = tkinter.Label(student_lb_frame, text="Student Diver:", bg=frame_color, font=TITLE_HEADER_FONT)
 student_label.grid(row=0, column=0, sticky="w", padx=(20, 0), pady=(5, 0))
-student_set_label = tkinter.Label(student_lb_frame, text="Set Student", bg=frame_color, font=header)
+student_set_label = tkinter.Label(student_lb_frame, text="Set Student", bg=frame_color, font=TITLE_HEADER_FONT)
 student_set_label.grid(row=0, column=0, columnspan=2, padx=(80, 0), pady=(5, 0))
 list_box_student = tkinter.Listbox(student_lb_frame, bg=listbox_color,
-                                   height=student_listbox_height, font=font)
+                                   height=student_listbox_height, font=STANDARD_FONT)
 list_box_student.grid(row=1, column=0, rowspan=3, columnspan=2, padx=(20, 30), pady=(10, 0), sticky="ew")
 add_student = customtkinter.CTkButton(student_lb_frame, text="Add Student", command=new_student,
                                       fg_color=main_button_color, text_color=main_button_text_color,
@@ -1658,7 +1659,7 @@ instructor_lb_frame = customtkinter.CTkFrame(master=window, fg_color=frame_color
                                              bg_color=background_color)
 instructor_lb_frame.grid(row=1, column=0, rowspan=1, sticky="nsew", padx=10, pady=10, ipadx=10, ipady=10)
 instructor_lb_frame.grid_columnconfigure(0, weight=1)
-instructor_label = tkinter.Label(instructor_lb_frame, text="PADI Instructor:", bg=frame_color, font=header)
+instructor_label = tkinter.Label(instructor_lb_frame, text="PADI Instructor:", bg=frame_color, font=TITLE_HEADER_FONT)
 instructor_label.grid(row=0, column=0, sticky="w", padx=(20, 0))
 
 # --- Import Instructor information from .json
@@ -1707,31 +1708,31 @@ main_switch_cw.select()
 main_switch_cw.grid(row=0, column=3, columnspan=2, stick="w")
 
 # Confined Water Labels
-confined_water_section = tkinter.Label(confined_water_frame, text="Confined Water", bg=frame_color, font=header)
+confined_water_section = tkinter.Label(confined_water_frame, text="Confined Water", bg=frame_color, font=TITLE_HEADER_FONT)
 confined_water_section.grid(row=0, column=0, pady=10)
 
 for cw_l in range(15):
-    cw_label = tkinter.Label(confined_water_frame, text=cw_label_list[cw_l], bg=frame_color, font=font)
+    cw_label = tkinter.Label(confined_water_frame, text=CONFINED_WATER_LABELS[cw_l], bg=frame_color, font=STANDARD_FONT)
     cw_label.grid(row=cw_l + 1, column=0, padx=(20, 0), sticky="e")
 
 # Confined Water Calendar
 cw_cal_list = []
 for cw_c in range(15):
-    cw_cal = DateEntry(confined_water_frame, selectmode="day", font=font)
+    cw_cal = DateEntry(confined_water_frame, selectmode="day", font=STANDARD_FONT)
     cw_cal.grid(row=cw_c + 1, column=1, padx=5)
     cw_cal_list.append(cw_cal)
 
 # Confined Water Set Instructor Label
 cw_set_instructor_list = []
 for cw_inst in range(15):
-    cw_set_inst = tkinter.Label(confined_water_frame, text="Set Instructor", bg=frame_color, font=font)
+    cw_set_inst = tkinter.Label(confined_water_frame, text="Set Instructor", bg=frame_color, font=STANDARD_FONT)
     cw_set_inst.grid(row=cw_inst + 1, column=2, padx=20)
     cw_set_instructor_list.append(cw_set_inst)
 
 # Confined Water Set Date Labels
 cw_set_date_list = []
 for cw_date in range(15):
-    cw_set_date = tkinter.Label(confined_water_frame, text="Set Date", bg=frame_color, font=font)
+    cw_set_date = tkinter.Label(confined_water_frame, text="Set Date", bg=frame_color, font=STANDARD_FONT)
     cw_set_date.grid(row=cw_date + 1, column=4, padx=(0, 20))
     cw_set_date_list.append(cw_set_date)
 
@@ -1757,7 +1758,7 @@ knowledge_development_frame.grid(row=0, column=1, rowspan=2, padx=20, pady=10, s
                                  ipady=10)
 
 knowledge_development_section = tkinter.Label(knowledge_development_frame, text="Knowledge Development", bg=frame_color,
-                                              font=header)
+                                              font=TITLE_HEADER_FONT)
 knowledge_development_section.grid(row=0, column=0, sticky="w", pady=10, padx=(20, 0), columnspan=2)
 
 main_switch_kd = customtkinter.CTkSwitch(knowledge_development_frame, text="", command=select_all_kd,
@@ -1770,7 +1771,7 @@ main_switch_kd.select()
 main_switch_kd.grid(row=2, column=3, )
 
 # --- RDP or eRDPml or Computer
-course_option_label = tkinter.Label(knowledge_development_frame, text="Course Option:", bg=frame_color, font=font)
+course_option_label = tkinter.Label(knowledge_development_frame, text="Course Option:", bg=frame_color, font=STANDARD_FONT)
 course_option_label.grid(row=1, column=3, pady=(0, 10))
 rdp_check = customtkinter.CTkCheckBox(knowledge_development_frame, text="RDP", checkbox_width=20,
                                       checkbox_height=20,
@@ -1798,37 +1799,37 @@ computer_check = customtkinter.CTkCheckBox(knowledge_development_frame, text="Co
                                            )
 computer_check.grid(row=1, column=7, pady=(0, 10))
 
-kr_complete = tkinter.Label(knowledge_development_frame, text="Knowledge", bg=frame_color, font=font)
+kr_complete = tkinter.Label(knowledge_development_frame, text="Knowledge", bg=frame_color, font=STANDARD_FONT)
 kr_complete.grid(row=2, column=4, padx=(0, 5), columnspan=2)
-pass_exam = tkinter.Label(knowledge_development_frame, text="Quiz/Exam", bg=frame_color, font=font)
+pass_exam = tkinter.Label(knowledge_development_frame, text="Quiz/Exam", bg=frame_color, font=STANDARD_FONT)
 pass_exam.grid(row=2, column=5, columnspan=2, padx=(15, 0))
-video_complete = tkinter.Label(knowledge_development_frame, text="Video", bg=frame_color, font=font)
+video_complete = tkinter.Label(knowledge_development_frame, text="Video", bg=frame_color, font=STANDARD_FONT)
 video_complete.grid(row=2, column=6, columnspan=2, padx=(20, 0))
 
 # Knowledge Development string
 for kd_s in range(7):
-    kd_string = tkinter.Label(knowledge_development_frame, text=kd_string_list[kd_s],
-                              font=font, background=frame_color)
+    kd_string = tkinter.Label(knowledge_development_frame, text=KNOWLEDGE_DEVELOPMENT_LABELS[kd_s],
+                              font=STANDARD_FONT, background=frame_color)
     kd_string.grid(row=kd_s + 3, column=0, padx=(30, 0), sticky="e")
 
 # Knowledge Development Calendar
 kd_cal_list = []
 for kd_c in range(7):
-    kd_cal = DateEntry(knowledge_development_frame, selectmode="day", font=font)
+    kd_cal = DateEntry(knowledge_development_frame, selectmode="day", font=STANDARD_FONT)
     kd_cal.grid(row=kd_c + 3, column=1, padx=5, pady=2)
     kd_cal_list.append(kd_cal)
 
 # Knowledge Development Set Instructor Label
 kd_set_instructor_list = []
 for kd_inst in range(7):
-    kd_set_inst = tkinter.Label(knowledge_development_frame, text="Set Instructor", bg=frame_color, font=font)
+    kd_set_inst = tkinter.Label(knowledge_development_frame, text="Set Instructor", bg=frame_color, font=STANDARD_FONT)
     kd_set_inst.grid(row=kd_inst + 3, column=2, padx=20)
     kd_set_instructor_list.append(kd_set_inst)
 
 # Knowledge Development Set Date Labels
 kd_set_date_list = []
 for kd_date in range(7):
-    kd_set_date = tkinter.Label(knowledge_development_frame, text="Set Date", bg=frame_color, font=font)
+    kd_set_date = tkinter.Label(knowledge_development_frame, text="Set Date", bg=frame_color, font=STANDARD_FONT)
     kd_set_date.grid(row=kd_date + 3, column=4, padx=(0, 20))
     kd_set_date_list.append(kd_set_date)
 
@@ -1887,7 +1888,7 @@ open_water_frame = customtkinter.CTkFrame(window, fg_color=frame_color,
 open_water_frame.grid(column=1, row=2, rowspan=1, stick="nsew", padx=(20, 10), pady=10, ipadx=10, ipady=10)
 
 open_water_section = tkinter.Label(open_water_frame, text="Open Water", bg=frame_color,
-                                   font=header)
+                                   font=TITLE_HEADER_FONT)
 open_water_section.grid(row=0, column=0, sticky="w", pady=10, padx=(20, 0), columnspan=2)
 
 # Main Switch
@@ -1901,7 +1902,7 @@ main_switch_ow.select()
 main_switch_ow.grid(row=0, column=3, columnspan=1)
 
 for ow_s in range(16):
-    ow_string = tkinter.Label(open_water_frame, text=ow_string_list[ow_s], font=font, background=frame_color)
+    ow_string = tkinter.Label(open_water_frame, text=OPEN_WATER_LABELS[ow_s], font=STANDARD_FONT, background=frame_color)
     ow_string.grid(row=ow_s + 1, column=0, padx=(20, 0), sticky="e")
 
 ow_cal_list = []
@@ -1909,21 +1910,21 @@ for ow_c in range(16):
     if 3 < ow_c < 14:
         pass
     else:
-        ow_cal = DateEntry(open_water_frame, selectmode="day", font=font)
+        ow_cal = DateEntry(open_water_frame, selectmode="day", font=STANDARD_FONT)
         ow_cal.grid(row=ow_c + 1, column=1, padx=5)
         ow_cal_list.append(ow_cal)
 
 # Open Water Set Instructor Label
 ow_set_instructor_list = []
 for ow_inst in range(16):
-    ow_set_inst = tkinter.Label(open_water_frame, text="Set Instructor", bg=frame_color, font=font)
+    ow_set_inst = tkinter.Label(open_water_frame, text="Set Instructor", bg=frame_color, font=STANDARD_FONT)
     ow_set_inst.grid(row=ow_inst + 1, column=2, padx=20)
     ow_set_instructor_list.append(ow_set_inst)
 
 # Knowledge Development Set Date Labels
 ow_set_date_list = []
 for ow_date in range(16):
-    ow_set_date = tkinter.Label(open_water_frame, text="Set Date", bg=frame_color, font=font)
+    ow_set_date = tkinter.Label(open_water_frame, text="Set Date", bg=frame_color, font=STANDARD_FONT)
     ow_set_date.grid(row=ow_date + 1, column=4)
     ow_set_date_list.append(ow_set_date)
 
@@ -1954,7 +1955,7 @@ for flex_c in range(16):
 right_frame = customtkinter.CTkFrame(window, fg_color=frame_color, corner_radius=8, bg_color=background_color)
 right_frame.grid(row=2, column=2, sticky="nsew", padx=(10, 20), pady=10, )
 
-choose_template_label = tkinter.Label(right_frame, text="Choose Template:", font=font, bg=frame_color)
+choose_template_label = tkinter.Label(right_frame, text="Choose Template:", font=STANDARD_FONT, bg=frame_color)
 choose_template_label.grid(row=0, column=0, pady=(20, 5))
 
 key_list = []

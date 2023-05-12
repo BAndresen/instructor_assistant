@@ -1551,7 +1551,6 @@ def clear_dict_values():
     """clears dictionary fields for pdf form"""
     global fields
     fields = fillpdfs.get_form_fields("assets/Record_and_Referral_Form.pdf")
-    print(fields)
 
 
 def reset_all():
@@ -2068,7 +2067,8 @@ class MainUI(customtkinter.CTk):
         self.menubar.add_cascade(label='Help', menu=self.help_)
         self.help_.add_command(label='Report a Issue', command=report_bug)
         self.help_.add_separator()
-        self.help_.add_command(label='About Instructor Paperwork Assistant', command=None)
+        self.help_.add_command(label='About Instructor Paperwork Assistant',
+                               command=lambda: webbrowser.open("https://github.com/BAndresen/instructor_assistant"))
 
         # --- Display Menu
         self.config(menu=self.menubar)

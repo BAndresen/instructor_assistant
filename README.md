@@ -3,7 +3,7 @@
 A tool to help PADI Scuba Diving Instructors complete the 'Record and Referral' form.
 
 <div align="center">
-<img src="Record_and_Referral_Form-1.png" height="300">
+<img src="assets/Record_and_Referral_Form-1.png" height="300">
 </div>
   
 
@@ -27,7 +27,7 @@ The user interface allows you to easily toggle single or entire sections on or o
 <br>
 <br>
 <div align="center">
-<img src="screengif.gif">
+<img src="assets/screengif.gif">
 </div>
 <br>
 <br>
@@ -55,9 +55,8 @@ The option to import bulk student information is available.  Currently the Instr
 
 For the `date_of_birth` column data can be in either a `datetime` or `string` format.  If using a string, format date *dd/mm/yyyy*.  
 <br>
-<br>
 <div align="center">
-<img src="student_import_example.png">
+<img src="assets/student_import_example.png">
 </div>
 
 

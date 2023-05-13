@@ -40,6 +40,9 @@ STUDENT_AND_REFERRAL_FORM = "assets/Record_and_Referral_Form.pdf"
 STANDARD_FONT = ("roboto", "10")
 TITLE_HEADER_FONT = ("roboto", "14")
 
+INSTRUCTOR_DATA = "config/instructor_data.json"
+DIVE_TEMPLATE_DATA = "config/dive_template_data.json"
+
 # Student Information Global Dictionary
 student_dict_global = {}
 
@@ -450,11 +453,11 @@ def new_template(ui):
     template_right_frame.grid(row=1, column=2, sticky="nsew", padx=10, pady=10)
 
     def delete_template(nuked_rule):
-        with open("config/dive_template_data.json", "r") as data:
+        with open(DIVE_TEMPLATE_DATA, "r") as data:
             temp = json.load(data)
 
         del temp[nuked_rule]
-        with open("config/dive_template_data.json", "w") as data:
+        with open(DIVE_TEMPLATE_DATA, "w") as data:
             json.dump(temp, data, indent=4)
 
         date_rule_box_set_rule.configure(values=temp)
@@ -467,7 +470,7 @@ def new_template(ui):
     delete_label.grid(row=0, column=0, pady=(20, 5))
 
     try:
-        with open("config/dive_template_data.json", "r") as data:
+        with open(DIVE_TEMPLATE_DATA, "r") as data:
             templates = json.load(data)
     except FileNotFoundError:
         templates = {}
@@ -541,10 +544,10 @@ def new_template(ui):
         new_data[template_name]["course_option"].append(computer_switch_set_rule.get())
 
         try:
-            with open("config/dive_template_data.json", "r") as data_file:
+            with open(DIVE_TEMPLATE_DATA, "r") as data_file:
                 data = json.load(data_file)
         except FileNotFoundError:
-            with open("config/dive_template_data.json", "w") as data_file:
+            with open(DIVE_TEMPLATE_DATA, "w") as data_file:
                 json.dump(new_data, data_file, indent=4)
         else:
             data.update(new_data)
@@ -555,7 +558,7 @@ def new_template(ui):
 
             main_ui.date_rule_box.configure(values=new_key_list)
 
-            with open("config/dive_template_data.json", "w") as data_file:
+            with open(DIVE_TEMPLATE_DATA, "w") as data_file:
                 json.dump(data, data_file, indent=4)
 
         new_template_window.destroy()
@@ -571,7 +574,7 @@ def new_template(ui):
 def execute_template():
     """Function to set Dates and Dives in main Window to users specs.'"""
 
-    with open("config/dive_template_data.json", "r") as datafile:  # --- Open Dictionary with Users Date/Dive Specs
+    with open(DIVE_TEMPLATE_DATA, "r") as datafile:  # --- Open Dictionary with Users Date/Dive Specs
         date_dict = json.load(datafile)
 
     template_name = main_ui.date_rule_box.get()
@@ -626,7 +629,7 @@ def execute_template():
 
 def set_instructor(ui):
     """Password Verification UI window for users to input their Instructor Password."""
-    with open("config/instructor_data.json", "r") as data_file:
+    with open(INSTRUCTOR_DATA, "r") as data_file:
         instructor_list = json.load(data_file)
     set_inst = main_ui.list_box.get()
     inst = main_ui.list_box.get()
@@ -1116,7 +1119,10 @@ def generate_pdf(input_path: str):
     save_path = config["save path"]["student_record_path"]
     output_path = f"{save_path}/{student_file_name}_Student_Record_Form_{today.day}_{today.month}_{today.year}.pdf"
     # --- Write pdf
-    fillpdfs.write_fillable_pdf(input_path, output_path, fields)
+    try:
+        fillpdfs.write_fillable_pdf(input_path, output_path, fields)
+    except FileNotFoundError:
+        messagebox.showerror(message="File path not found. Choose new file path")
 
 
 def new_student(ui: object):
@@ -1236,7 +1242,7 @@ def new_student(ui: object):
 
 def update_instructor_menu():
     """update instructor option menu"""
-    with open("instructor_data.json", "r") as inst:
+    with open(INSTRUCTOR_DATA, "r") as inst:
         instructor_info = json.load(inst)
     instructor_list_menu = []
 
@@ -1313,19 +1319,19 @@ def new_instructor(ui):
             }
         }
         try:
-            with open("config/instructor_data.json", "r") as data_file:
+            with open(INSTRUCTOR_DATA, "r") as data_file:
                 data = json.load(data_file)
         except FileNotFoundError:
-            with open("config/instructor_data.json", "w") as data_file:
+            with open(INSTRUCTOR_DATA, "w") as data_file:
                 json.dump(new_data, data_file, indent=4)
         else:
             data.update(new_data)
-            with open("config/instructor_data.json", "w") as data_file:
+            with open(INSTRUCTOR_DATA, "w") as data_file:
                 json.dump(data, data_file, indent=4)
 
         # --- Refresher Instructor Listbox
         try:
-            with open("config/instructor_data.json", "r") as data_file:
+            with open(INSTRUCTOR_DATA, "r") as data_file:
                 Instructor_list = json.load(data_file)
         except FileNotFoundError:
             print("Instructor File not found")
@@ -1361,11 +1367,11 @@ def new_instructor(ui):
 
 def remove_inst(deleted_instructor):
     """delete selected instructor"""
-    with open("config/instructor_data.json", "r") as data:
+    with open(INSTRUCTOR_DATA, "r") as data:
         inst_info = json.load(data)
         del inst_info[deleted_instructor]
 
-    with open("config/instructor_data.json", "w") as data:
+    with open(INSTRUCTOR_DATA, "w") as data:
         json.dump(inst_info, data, indent=4)
 
     main_ui.list_box.set("")
@@ -1536,7 +1542,7 @@ def import_student():
 
 
 def refresher_main_combobox():
-    with open("config/dive_template_data.json", "r") as data:
+    with open(DIVE_TEMPLATE_DATA, "r") as data:
         template = json.load(data)
 
     key_list = []
@@ -1648,7 +1654,7 @@ class MainUI(customtkinter.CTk):
         # --- Import Instructor information from .json
         self.instructor_list_menu = []
         try:
-            with open("config/instructor_data.json", "r") as data_file:
+            with open(INSTRUCTOR_DATA, "r") as data_file:
                 instructor_info = json.load(data_file)
                 for instructor in instructor_info.keys():  # update list box
                     self.instructor_list_menu.append(instructor)
@@ -1704,7 +1710,7 @@ class MainUI(customtkinter.CTk):
         self.confined_water_section.grid(row=0, column=0, pady=10)
 
         for cw_l in range(15):
-            cw_label = tkinter.Label(self.confined_water_frame, text=CONFINED_WATER_LABELS[cw_l], bg=theme.frame_color,
+            cw_label = tkinter.Label(self.confined_water_frame, text=confined_water_labels[cw_l], bg=theme.frame_color,
                                      font=STANDARD_FONT)
             cw_label.grid(row=cw_l + 1, column=0, padx=(20, 0), sticky="e")
 
@@ -1811,7 +1817,7 @@ class MainUI(customtkinter.CTk):
 
         # Knowledge Development string
         for kd_s in range(7):
-            kd_string = tkinter.Label(self.knowledge_development_frame, text=KNOWLEDGE_DEVELOPMENT_LABELS[kd_s],
+            kd_string = tkinter.Label(self.knowledge_development_frame, text=knowledge_development_labels[kd_s],
                                       font=STANDARD_FONT, background=theme.frame_color)
             kd_string.grid(row=kd_s + 3, column=0, padx=(30, 0), sticky="e")
 
@@ -1907,7 +1913,7 @@ class MainUI(customtkinter.CTk):
         self.main_switch_ow.grid(row=0, column=3, columnspan=1)
 
         for ow_s in range(16):
-            ow_string = tkinter.Label(self.open_water_frame, text=OPEN_WATER_LABELS[ow_s], font=STANDARD_FONT,
+            ow_string = tkinter.Label(self.open_water_frame, text=open_water_labels[ow_s], font=STANDARD_FONT,
                                       background=theme.frame_color)
             ow_string.grid(row=ow_s + 1, column=0, padx=(20, 0), sticky="e")
 
@@ -1969,7 +1975,7 @@ class MainUI(customtkinter.CTk):
 
         key_list = []
         try:
-            with open("config/dive_template_data.json", "r") as data_file:
+            with open(DIVE_TEMPLATE_DATA, "r") as data_file:
                 data = json.load(data_file)
                 for keys in data.keys():
                     key_list.append(keys)
@@ -2067,11 +2073,12 @@ class MainUI(customtkinter.CTk):
         self.menubar.add_cascade(label='Help', menu=self.help_)
         self.help_.add_command(label='Report a Issue', command=report_bug)
         self.help_.add_separator()
-        self.help_.add_command(label='About Instructor Paperwork Assistant',
+        self.help_.add_command(label='About Instructor Assistant',
                                command=lambda: webbrowser.open("https://github.com/BAndresen/instructor_assistant"))
 
         # --- Display Menu
         self.config(menu=self.menubar)
+
 
 
 if __name__ == "__main__":

@@ -42,11 +42,11 @@ Save time and with the option to import bulk student information from a course r
 # Getting Started
 
 ### Set Information
-Use the `Set Student` `Set Instructor ` `Set Date/Dive` buttons to confirm user imputs proir to pressing the `Generate PDF` button.  The "Set" function will replace the stock text field with the desired text information in red.  The red text is an indication to the user what information will be added to the Student Record File and where.  To leave any field blank use the toggle button to turn off desired section prior to using the Set function.
+Use the `Set Student` `Set Instructor` and `Set Date/Dive` buttons to confirm selections proir to pressing the `Generate PDF` button.  The "Set" function will replace the stock text field with the desired text information in red.  The red text is an indication to the user what information will be added to the Student Record File and where.  To leave any field blank use the toggle button to turn the off desired section prior to using the Set function.
 
 <br>
 <div align="center">
-<img src="assets/main_ui.png">
+<img src="assets/main_ui.png" height=600>
 </div>
 <br>
 
@@ -75,6 +75,14 @@ For the `date_of_birth` column data can be in either a `datetime` or `string` fo
 <br>
 <div align="center">
 <img src="assets/student_import_example.png">
+</div>
+
+### Making a Dive Template
+The purpose of a dive template is to make date-pairs for different skills completed on the same day.  Each skill with a date has an integer code. For example, Confined Water One's code is 0.  The user can set other skill boxes to 0 to make a date-pair with Confined Water One.  After saving and selecting the template on the Main UI the user can press the `Set Template` button and the program will read the date set for Confined Water One and match each of the corresponding date-pairs.  Additionally, users can input open water flexible dive completion set points, choose course options (rdp,erdpml,computer) or toggle any section they want to leave blank. 
+
+<br>
+<div align="center">
+<img src="assets/template_ui_screenshot.png" height=600>
 </div>
 
 

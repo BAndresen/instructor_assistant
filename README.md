@@ -37,7 +37,25 @@ The user interface allows you to easily toggle single or entire sections on or o
 Create and customize templates to complete even faster.  Each Instructor has a unique way of conducting the PADI Open Water Course and often repeats parts of the course schedule.  For example, for the Confined Water One dive an Instructor may also complete Knowledge Review Section One, 200m swim and the 10min float on the same day.  Dive Templates allow you to save these matching date pairs so you only need to complete the Confined Water One field date.  After pressing the "Set Template" button the subsequent date pairs will be updated.
 
 ### Import Student Information
-The option to import bulk student information is available.  Currently the Instructor Assistant App supports imports from an excel file with the following column headings.
+Save time and with the option to import bulk student information from a course roster excel file.  
+
+# Getting Started
+
+### Set Information
+Use the `Set Student` `Set Instructor ` `Set Date/Dive` buttons to confirm user imputs proir to pressing the `Generate PDF` button.  The "Set" function will replace the stock text field with the desired text information in red.  The red text is an indication to the user what information will be added to the Student Record File and where.  To leave any field blank use the toggle button to turn off desired section prior to using the Set function.
+
+<br>
+<div align="center">
+<img src="assets/main_ui.png">
+</div>
+<br>
+
+### Choose PDF Save Path
+By default the Student Record Files will be saved to the users desktop.  To change the desired location select the Edit > Choose PDF Save Path Button to set a new save path. 
+
+
+### Importing Student Information
+Currently the Instructor Assistant App supports imports from an excel file with the following column headings.
 
 ```
 'first_name' 
@@ -53,11 +71,13 @@ The option to import bulk student information is available.  Currently the Instr
 'country'
 ```
 
-For the `date_of_birth` column data can be in either a `datetime` or `string` format.  If using a string, format date *dd/mm/yyyy*.  
+For the `date_of_birth` column data can be in either a `datetime` or `string` format.  If using a string, format date *dd/mm/yyyy*.  See example "assets/openwater_diver_course_example_import.xlsx" for an example student import file.
 <br>
 <div align="center">
 <img src="assets/student_import_example.png">
 </div>
+
+
 
 
     

@@ -1,8 +1,6 @@
 """PADI Scuba Diving Instructors are required to complete the 'Record_and_Referral_Form' for every student
 after the PADI Open Water Course. This 'Instructor Assistant' aims to make that process fast and easy.
 
-Additionally, this program is a project to help me learn Python.
-
 Author: Brendan Andresen <brendan.development@pm.me>
 Created: May 6th, 2023
 """
@@ -15,7 +13,9 @@ import tkinter
 import json
 import hashlib
 import secrets
-import customtkinter  # I modified ctk.entry.py line 388 def get() to only return entry.get().
+import customtkinter
+# I modified ctk.entry.py line 388 def get() to only return entry.get().
+# I modified ctk.switch line 20 def __init__ width to 65
 import pandas
 import configparser
 import webbrowser

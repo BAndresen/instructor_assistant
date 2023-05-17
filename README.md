@@ -93,7 +93,7 @@ On the Release section of this repository there is a Windows Installer users can
 _Note: The Windows Installer doesn't have a Windows Publisher's Certificate which may prompt warnings during install.  Included on the Release page is a SHA-256 hash digest of the Installer if a user wants to verify data integrity._
 
 ### Source Code
-The Instructor's Assistant is written in Python. Users can fork and run the source code directly on there machine if they wish. Below is a list of required libraries for this project.
+The Instructor's Assistant is written in Python. Users can download and run the source code directly on there machine if they wish. Below is a list of required libraries for this project.
 
 ```
 Babel==2.12.1

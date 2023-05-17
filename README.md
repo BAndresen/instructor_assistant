@@ -42,7 +42,7 @@ Save time and with the option to import bulk student information from a course r
 # Getting Started
 
 ### Set Information
-Use the `Set Student` `Set Instructor` and `Set Date/Dive` buttons to confirm selections proir to pressing the `Generate PDF` button.  The "Set" function will replace the stock text field with the desired text information in red.  The red text is an indication to the user what information will be added to the Student Record File and where.  To leave any field blank use the toggle button to turn the off desired section prior to using the Set function.
+Use the `Set Student` `Set Instructor` and `Set Date/Dive` buttons to confirm selections prior to pressing the `Generate PDF` button.  The "Set" function will replace the stock text field with the desired text information in red.  The red text is an indication to the user what information will be added to the Student Record File and where.  To leave any field blank use the toggle button to turn the off desired section prior to using the Set function.
 
 <br>
 <div align="center">
@@ -51,7 +51,7 @@ Use the `Set Student` `Set Instructor` and `Set Date/Dive` buttons to confirm se
 <br>
 
 ### Choose PDF Save Path
-By default the Student Record Files will be saved to the users desktop and generated everytime the `Generate PDF` button is pressed.  To change the desired location select the Edit > Choose PDF Save Path Button to set a new save path. 
+By default the Student Record Files will be saved to the users desktop and generated every time the `Generate PDF` button is pressed.  To change the desired location select the Edit > Choose PDF Save Path Button to set a new save path. 
 
 
 ### Importing Student Information
@@ -85,11 +85,52 @@ The purpose of a dive template is to make date-pairs for different skills comple
 <img src="assets/template_ui_screenshot.png" height=600>
 </div>
 
+# Installation
 
+### Windows Installer
+On the Release section of this repository there is a Windows Installer users can download.  Currently with version 0.1.0, this program is setup up to run on the local users directory and can be downloaded to `C:\Users\<username>\AppData\Local\instructors_assistant`.  A Desktop and Startmenu shortcut is included as well as an Uninstaller.  
 
+_Note: The Windows Installer doesn't have a Windows Publisher's Certificate which may prompt warnings during install.  Included on the Release page is a SHA-256 hash digest of the Installer if a user wants to verify data integrity._
 
+### Source Code
+The Instructor's Assistant is written in Python. Users can fork and run the source code directly on there machine if they wish. Below is a list of required libraries for this project.
+
+```
+Babel==2.12.1
+customtkinter==5.1.3
+darkdetect==0.8.0
+et-xmlfile==1.1.0
+fillpdf==0.7.2
+numpy==1.24.3
+openpyxl==3.1.2
+pandas==2.0.1
+pdf2image==1.16.3
+pdfrw2==0.5.0
+Pillow==9.5.0
+PyMuPDF==1.22.3
+python-dateutil==2.8.2
+pytz==2023.3
+six==1.16.0
+tkcalendar==1.6.1
+tzdata==2023.3
+```
+_Note: I tweaked a few lines from the customtkinter libary to fit the projects needs_
+
+```
+    def __init__(self,
+                 master: any,
+                 width: int = 65,  # <--  Line 20 from ctk.switch module changed width to 65 from 100
+                 height: int = 24,
+ ```
+```
+    def get(self):  # <-- Line 338 from the ctk.entry module commented out the IF/Else statement. 
+#        if self._placeholder_text_active:
+#            return ""
+#        else:
+            return self._entry.get()
+```
     
-
-
+# Contact Me
+I hope to continue to develop this tool for the scuba community as I learn more. Please don't hesitate to reach out with any issues or feedback.  brendan.development@pm.me
 
   

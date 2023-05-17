@@ -30,18 +30,21 @@ from tkinter import Toplevel, Menu, messagebox, filedialog, PhotoImage
 today = datetime.datetime.today()
 
 # Constants
-UI_SETUP_LABELS = "config/ui_setup_labels.json"
+
+path = os.getcwd()
+
+UI_SETUP_LABELS = f"{path}\\config\\ui_setup_labels.json"
 with open(UI_SETUP_LABELS, "r") as file:
     data = json.load(file)
 CONFINED_WATER_LABELS = data["cw_water_list"]
 KNOWLEDGE_DEVELOPMENT_LABELS = data["kd_string_list"]
 OPEN_WATER_LABELS = data["ow_string_list"]
-STUDENT_AND_REFERRAL_FORM = "assets/Record_and_Referral_Form.pdf"
+STUDENT_AND_REFERRAL_FORM = f"{path}\\assets\\Record_and_Referral_Form.pdf"
 STANDARD_FONT = ("roboto", "10")
 TITLE_HEADER_FONT = ("roboto", "14")
 
-INSTRUCTOR_DATA = "config/instructor_data.json"
-DIVE_TEMPLATE_DATA = "config/dive_template_data.json"
+INSTRUCTOR_DATA = f"{path}\\config\\instructor_data.json"
+DIVE_TEMPLATE_DATA = f"{path}\\config\\dive_template_data.json"
 
 # Student Information Global Dictionary
 student_dict_global = {}
@@ -109,7 +112,11 @@ def new_template(ui):
     # --- Title Template
     template_title_frame = customtkinter.CTkFrame(new_template_window, fg_color=theme.frame_color)
     template_title_frame.grid(row=0, column=0, padx=10, pady=10, stick="nsew")
-    template_name_entry = customtkinter.CTkEntry(template_title_frame, width=200, height=30)
+    template_name_entry = customtkinter.CTkEntry(template_title_frame, width=200, height=30,
+                                                 text_color=theme.text_color,
+                                                 fg_color=theme.listbox_color,
+                                                 border_color=theme.main_button_color)
+
     template_name_entry.grid(column=1, row=0, pady=20, sticky="w")
     template_name_label = tkinter.Label(template_title_frame, text="Template Name:", font=TITLE_HEADER_FONT,
                                         background=theme.frame_color)
@@ -194,7 +201,11 @@ def new_template(ui):
     cw_entry_list = []
     for n in range(15):
         cw_entry = customtkinter.CTkEntry(template_confined_frame, width=40,
-                                          placeholder_text_color=theme.text_color, placeholder_text=n, height=25)
+                                          placeholder_text_color=theme.text_color, placeholder_text=n, height=25,
+                                          text_color=theme.text_color,
+                                          fg_color=theme.listbox_color,
+                                          border_color=theme.main_button_color)
+
         cw_entry.grid(row=n + 1, column=1, pady=2)
         cw_entry_list.append(cw_entry)
 
@@ -271,14 +282,20 @@ def new_template(ui):
         kd_entry = customtkinter.CTkEntry(template_knowledge_frame, placeholder_text=(n + 15),
                                           width=40,
                                           placeholder_text_color=theme.text_color,
-                                          height=25
-                                          )
+                                          height=25,
+                                          text_color=theme.text_color,
+                                          fg_color=theme.listbox_color,
+                                          border_color=theme.main_button_color)
+
         kd_entry.grid(row=n + 1, column=1, pady=2)
         kd_entry_list.append(kd_entry)
 
     kd_exam_entry_list = []
     for n in range(6):
-        kd_entry_exam = customtkinter.CTkEntry(template_knowledge_frame, placeholder_text=(""), width=60, height=25)
+        kd_entry_exam = customtkinter.CTkEntry(template_knowledge_frame, placeholder_text=(""), width=60, height=25,
+                                               text_color=theme.text_color,
+                                               fg_color=theme.listbox_color,
+                                               border_color=theme.main_button_color)
         kd_entry_exam.grid(row=n + 1, column=3, columnspan=1, padx=(0, 20))
         kd_exam_entry_list.append(kd_entry_exam)
 
@@ -381,12 +398,19 @@ def new_template(ui):
         if 3 < n < 14:
             ow_entry = customtkinter.CTkEntry(template_open_water, placeholder_text="", width=40,
                                               placeholder_text_color=theme.text_color,
-                                              height=25, )
+                                              height=25,
+                                              text_color=theme.text_color,
+                                              fg_color=theme.listbox_color,
+                                              border_color=theme.main_button_color)
+
             ow_entry.grid(row=n + 1, column=1, pady=2)
         else:
             ow_entry = customtkinter.CTkEntry(template_open_water, placeholder_text=(index_ow), width=40,
                                               placeholder_text_color=theme.text_color,
-                                              height=25)
+                                              height=25,
+                                              text_color=theme.text_color,
+                                              fg_color=theme.listbox_color,
+                                              border_color=theme.main_button_color)
             ow_entry.grid(row=n + 1, column=1, pady=2)
             index_ow += 1
         ow_entry_list.append(ow_entry)
@@ -482,7 +506,10 @@ def new_template(ui):
                                                          fg_color=theme.background_color,
                                                          text_color=theme.text_color,
                                                          button_color=theme.main_button_color,
-                                                         button_hover_color=theme.main_button_color_hover
+                                                         button_hover_color=theme.main_button_color_hover,
+                                                         dropdown_fg_color=theme.background_color,
+                                                         dropdown_text_color=theme.text_color,
+                                                         dropdown_hover_color=theme.frame_color
                                                          )
     date_rule_box_set_rule.grid(row=1, column=0, padx=(15, 0), pady=(0, 20))
 
@@ -568,7 +595,7 @@ def new_template(ui):
                                               hover_color=theme.main_button_color_hover,
                                               command=save_template)
 
-    set_rule_button.grid(column=0, row=3, padx=(15, 0), pady=(400, 0))
+    set_rule_button.grid(column=0, row=3, padx=(15, 0), pady=(350, 0))
 
 
 def execute_template():
@@ -644,7 +671,11 @@ def set_instructor(ui):
     pass_label = tkinter.Label(pass_window, text="Verify Instructor Password", font=TITLE_HEADER_FONT,
                                background=theme.background_color)
     pass_label.grid(column=0, row=0, sticky="w")
-    pass_entry = customtkinter.CTkEntry(pass_frame, show="*")
+    pass_entry = customtkinter.CTkEntry(pass_frame, show="*",
+                                        text_color=theme.text_color,
+                                        fg_color=theme.listbox_color,
+                                        border_color=theme.main_button_color)
+
     pass_entry.grid(column=0, row=0, pady=10, padx=10, sticky="ew")
     salt = (instructor_list[inst]["Password"]["Salt"])
     hashed_pass = (instructor_list[inst]["Password"]["Hash"])
@@ -1145,27 +1176,42 @@ def new_student(ui: object):
     student_f_name_label = tkinter.Label(student_frame, text="First Name:", background=theme.frame_color,
                                          font=STANDARD_FONT)
     student_f_name_label.grid(column=0, row=0, sticky="e", pady=(30, 0), padx=2)
-    student_f_name_entry = customtkinter.CTkEntry(student_frame, width=30, height=25)
+    student_f_name_entry = customtkinter.CTkEntry(student_frame, width=30, height=25,
+                                                  text_color=theme.text_color,
+                                                  fg_color=theme.listbox_color,
+                                                  border_color=theme.main_button_color)
     student_f_name_entry.grid(column=1, row=0, columnspan=3, padx=(0, 30), pady=(30, 2), sticky="ew")
 
     student_l_name_label = tkinter.Label(student_frame, text="Last Name:", background=theme.frame_color,
                                          font=STANDARD_FONT)
     student_l_name_label.grid(column=0, row=1, sticky="e", pady=2)
-    student_l_name_entry = customtkinter.CTkEntry(student_frame, width=30, height=25)
+    student_l_name_entry = customtkinter.CTkEntry(student_frame, width=30, height=25,
+                                                  text_color=theme.text_color,
+                                                  fg_color=theme.listbox_color,
+                                                  border_color=theme.main_button_color)
     student_l_name_entry.grid(column=1, row=1, columnspan=3, padx=(0, 30), pady=(2), sticky="ew")
 
     dob_label = tkinter.Label(student_frame, text="DOB: (DD/MM/YYYY)", background=theme.frame_color, font=STANDARD_FONT)
     dob_label.grid(column=0, row=2, sticky="e", padx=(30, 0))
-    dob_entry = customtkinter.CTkEntry(student_frame, width=15, height=25)
+    dob_entry = customtkinter.CTkEntry(student_frame, width=15, height=25,
+                                       text_color=theme.text_color,
+                                       fg_color=theme.listbox_color,
+                                       border_color=theme.main_button_color)
     dob_entry.grid(column=1, row=2, sticky="ew", pady=2)
 
     student_email_label = tkinter.Label(student_frame, text="Email:", background=theme.frame_color, font=STANDARD_FONT)
     student_email_label.grid(row=3, column=0, sticky="e")
-    student_email_entry = customtkinter.CTkEntry(student_frame, width=30, height=25)
+    student_email_entry = customtkinter.CTkEntry(student_frame, width=30, height=25,
+                                                 text_color=theme.text_color,
+                                                 fg_color=theme.listbox_color,
+                                                 border_color=theme.main_button_color)
     student_email_entry.grid(row=3, column=1, columnspan=3, sticky="ew", padx=(0, 30), pady=2)
     student_phone_label = tkinter.Label(student_frame, text="Phone:", background=theme.frame_color, font=STANDARD_FONT)
     student_phone_label.grid(row=4, column=0, sticky="e", pady=5)
-    student_phone_entry = customtkinter.CTkEntry(student_frame, width=30, height=25)
+    student_phone_entry = customtkinter.CTkEntry(student_frame, width=30, height=25,
+                                                 text_color=theme.text_color,
+                                                 fg_color=theme.listbox_color,
+                                                 border_color=theme.main_button_color)
     student_phone_entry.grid(row=4, column=1, columnspan=3, padx=(0, 30), sticky="ew")
 
     sex_label = tkinter.Label(student_frame, text="Sex", padx=1, background=theme.frame_color, font=STANDARD_FONT)
@@ -1182,23 +1228,38 @@ def new_student(ui: object):
     mailing_label.grid(row=7, column=0, sticky="e", pady=(20, 5))
     street_label = tkinter.Label(student_frame, text="Street:", background=theme.frame_color, font=STANDARD_FONT)
     street_label.grid(row=8, column=0, sticky="e", pady=2)
-    street_entry = customtkinter.CTkEntry(student_frame, width=30, height=25)
+    street_entry = customtkinter.CTkEntry(student_frame, width=30, height=25,
+                                          text_color=theme.text_color,
+                                          fg_color=theme.listbox_color,
+                                          border_color=theme.main_button_color)
     street_entry.grid(row=8, column=1, columnspan=3, padx=(0, 30), sticky="ew", pady=2)
     city_label = tkinter.Label(student_frame, text="City:", background=theme.frame_color, font=STANDARD_FONT)
     city_label.grid(row=9, column=0, sticky="e")
-    city_entry = customtkinter.CTkEntry(student_frame, height=25)
+    city_entry = customtkinter.CTkEntry(student_frame, height=25,
+                                        text_color=theme.text_color,
+                                        fg_color=theme.listbox_color,
+                                        border_color=theme.main_button_color)
     city_entry.grid(row=9, column=1, sticky="ew", pady=2)
     province_label = tkinter.Label(student_frame, text="Province:", background=theme.frame_color, font=STANDARD_FONT)
     province_label.grid(row=10, column=0, sticky="e")
-    province_entry = customtkinter.CTkEntry(student_frame, height=25)
+    province_entry = customtkinter.CTkEntry(student_frame, height=25,
+                                            text_color=theme.text_color,
+                                            fg_color=theme.listbox_color,
+                                            border_color=theme.main_button_color)
     province_entry.grid(row=10, column=1, sticky="ew", pady=2)
     country_label = tkinter.Label(student_frame, text="Country:", background=theme.frame_color, font=STANDARD_FONT)
     country_label.grid(row=11, column=0, sticky="e")
-    country_entry = customtkinter.CTkEntry(student_frame, height=25)
+    country_entry = customtkinter.CTkEntry(student_frame, height=25,
+                                           text_color=theme.text_color,
+                                           fg_color=theme.listbox_color,
+                                           border_color=theme.main_button_color)
     country_entry.grid(row=11, column=1, sticky="ew", pady=2)
     postal_label = tkinter.Label(student_frame, text="Postal:", background=theme.frame_color, font=STANDARD_FONT)
     postal_label.grid(row=12, column=0, sticky="e")
-    postal_entry = customtkinter.CTkEntry(student_frame, height=25)
+    postal_entry = customtkinter.CTkEntry(student_frame, height=25,
+                                          text_color=theme.text_color,
+                                          fg_color=theme.listbox_color,
+                                          border_color=theme.main_button_color)
     postal_entry.grid(row=12, column=1, sticky="ew", pady=2)
 
     def update_student():
@@ -1273,35 +1334,56 @@ def new_instructor(ui):
     instructor_name_label = tkinter.Label(instructor_frame, text="PADI Instructor:", font=STANDARD_FONT,
                                           background=theme.frame_color)
     instructor_name_label.grid(column=0, row=0, sticky="e", pady=(20, 2))
-    instructor_name_entry = customtkinter.CTkEntry(instructor_frame, height=25)
+    instructor_name_entry = customtkinter.CTkEntry(instructor_frame, height=25,
+                                                   text_color=theme.text_color,
+                                                   fg_color=theme.listbox_color,
+                                                   border_color=theme.main_button_color)
     instructor_name_entry.grid(column=1, row=0, columnspan=2, sticky="ew", pady=(20, 2))
     initials_label = tkinter.Label(instructor_frame, text="Initials", font=STANDARD_FONT, background=theme.frame_color)
     initials_label.grid(column=0, row=1, sticky="e", pady=2)
-    initials_entry = customtkinter.CTkEntry(instructor_frame, height=25)
+    initials_entry = customtkinter.CTkEntry(instructor_frame, height=25,
+                                            text_color=theme.text_color,
+                                            fg_color=theme.listbox_color,
+                                            border_color=theme.main_button_color)
     initials_entry.grid(column=1, row=1, sticky="ew", pady=2)
     padi_number_label = tkinter.Label(instructor_frame, text="PADI Number:", font=STANDARD_FONT,
                                       background=theme.frame_color)
     padi_number_label.grid(row=3, column=0, sticky="e", pady=2)
-    padi_number_entry = customtkinter.CTkEntry(instructor_frame, height=25)
+    padi_number_entry = customtkinter.CTkEntry(instructor_frame, height=25,
+                                               text_color=theme.text_color,
+                                               fg_color=theme.listbox_color,
+                                               border_color=theme.main_button_color)
     padi_number_entry.grid(row=3, column=1, sticky="ew", pady=2)
     store_number_label = tkinter.Label(instructor_frame, text="PADI Store Number s-:", font=STANDARD_FONT,
                                        background=theme.frame_color)
     store_number_label.grid(row=4, column=0, sticky="e", pady=2)
-    store_number_entry = customtkinter.CTkEntry(instructor_frame, height=25)
+    store_number_entry = customtkinter.CTkEntry(instructor_frame, height=25,
+                                                text_color=theme.text_color,
+                                                fg_color=theme.listbox_color,
+                                                border_color=theme.main_button_color)
     store_number_entry.grid(row=4, column=1, sticky="ew", pady=2)
     phone_label = tkinter.Label(instructor_frame, text="Phone:", font=STANDARD_FONT, background=theme.frame_color)
     phone_label.grid(row=5, column=0, sticky="e", pady=2)
-    phone_entry = customtkinter.CTkEntry(instructor_frame, height=25)
+    phone_entry = customtkinter.CTkEntry(instructor_frame, height=25,
+                                         text_color=theme.text_color,
+                                         fg_color=theme.listbox_color,
+                                         border_color=theme.main_button_color)
     phone_entry.grid(row=5, column=1, columnspan=2, sticky="ew", pady=2)
     instructor_email_label = tkinter.Label(instructor_frame, text="Email:", font=STANDARD_FONT,
                                            background=theme.frame_color)
     instructor_email_label.grid(row=6, column=0, sticky="e", pady=2)
-    instructor_email_entry = customtkinter.CTkEntry(instructor_frame, height=25)
+    instructor_email_entry = customtkinter.CTkEntry(instructor_frame, height=25,
+                                                    text_color=theme.text_color,
+                                                    fg_color=theme.listbox_color,
+                                                    border_color=theme.main_button_color)
     instructor_email_entry.grid(row=6, column=1, columnspan=2, sticky="ew", pady=2)
     instructor_password_label = tkinter.Label(instructor_frame, text="Password:", font=STANDARD_FONT,
                                               background=theme.frame_color)
     instructor_password_label.grid(row=7, column=0, sticky="e", pady=2)
-    instructor_password_entry = customtkinter.CTkEntry(instructor_frame, show="*", height=25)
+    instructor_password_entry = customtkinter.CTkEntry(instructor_frame, show="*", height=25,
+                                                       text_color=theme.text_color,
+                                                       fg_color=theme.listbox_color,
+                                                       border_color=theme.main_button_color)
     instructor_password_entry.grid(row=7, column=1, columnspan=2, sticky="ew", pady=2)
 
     def update_instructor():
@@ -1503,7 +1585,7 @@ def choose_save_path():
     file_path = filedialog.askdirectory()
     if file_path:
         config["save path"]["student_record_path"] = file_path
-        with open("config/config.ini", "w") as path:
+        with open("/config/config.ini", "w") as path:
             config.write(path)
 
 
@@ -1601,7 +1683,8 @@ def report_bug():
 class MainUI(customtkinter.CTk):
     def __init__(self, confined_water_labels: list, knowledge_development_labels: list, open_water_labels: list, theme):
         super().__init__()
-        self.config(pady=(20), padx=30, bg=theme.background_color)
+        self.config(pady=(20), padx=30,
+                    bg=theme.background_color)
         self.title("Instructor Assistant")
         self.geometry(f"{1750}x{970}+100+0")
         self.grid_columnconfigure(0, weight=1)
@@ -1609,6 +1692,7 @@ class MainUI(customtkinter.CTk):
         self.grid_rowconfigure(0, weight=1)
         self.grid_rowconfigure(2, weight=1)
         self.iconbitmap("assets/logo.ico")
+        # self._set_appearance_mode("system")
         # --- Student Listbox
         self.student_lb_frame = customtkinter.CTkFrame(master=self, fg_color=theme.frame_color, corner_radius=8,
                                                        bg_color=theme.background_color)
@@ -1666,7 +1750,10 @@ class MainUI(customtkinter.CTk):
                                                     fg_color=theme.background_color,
                                                     text_color=theme.text_color,
                                                     button_color=theme.main_button_color,
-                                                    button_hover_color=theme.main_button_color_hover
+                                                    button_hover_color=theme.main_button_color_hover,
+                                                    dropdown_fg_color=theme.background_color,
+                                                    dropdown_text_color=theme.text_color,
+                                                    dropdown_hover_color=theme.frame_color
                                                     )
         self.list_box.grid(row=0, column=1, padx=(0, 80), pady=20)
         self.add_inst_button = customtkinter.CTkButton(self.instructor_lb_frame, text="Add Instructor",
@@ -1694,6 +1781,9 @@ class MainUI(customtkinter.CTk):
                                                            bg_color=theme.background_color)
         self.confined_water_frame.grid(column=0, row=2, padx=10, pady=10, sticky="nsew", ipadx=10, ipady=10)
 
+        self.confined_water_frame.grid_columnconfigure(4, weight=1)
+        self.confined_water_frame.grid_columnconfigure(2, weight=1)
+
         self.main_switch_cw = customtkinter.CTkSwitch(self.confined_water_frame, text="",
                                                       command=select_all_cw,
                                                       fg_color=theme.master_switch_off_color,
@@ -1712,7 +1802,7 @@ class MainUI(customtkinter.CTk):
         for cw_l in range(15):
             cw_label = tkinter.Label(self.confined_water_frame, text=confined_water_labels[cw_l], bg=theme.frame_color,
                                      font=STANDARD_FONT)
-            cw_label.grid(row=cw_l + 1, column=0, padx=(20, 0), sticky="e")
+            cw_label.grid(row=cw_l + 1, column=0, padx=(20, 0), pady=2,sticky="e")
 
         # Confined Water Calendar
         self.cw_cal_list = []
@@ -1726,7 +1816,7 @@ class MainUI(customtkinter.CTk):
         for cw_inst in range(15):
             cw_set_inst = tkinter.Label(self.confined_water_frame, text="Set Instructor", bg=theme.frame_color,
                                         font=STANDARD_FONT)
-            cw_set_inst.grid(row=cw_inst + 1, column=2, padx=20)
+            cw_set_inst.grid(row=cw_inst + 1, column=2, padx=10)
             self.cw_set_instructor_list.append(cw_set_inst)
 
         # Confined Water Set Date Labels
@@ -1734,7 +1824,7 @@ class MainUI(customtkinter.CTk):
         for cw_date in range(15):
             cw_set_date = tkinter.Label(self.confined_water_frame, text="Set Date", bg=theme.frame_color,
                                         font=STANDARD_FONT)
-            cw_set_date.grid(row=cw_date + 1, column=4, padx=(0, 20))
+            cw_set_date.grid(row=cw_date + 1, column=4, padx=(0, 30), sticky="w")
             self.cw_set_date_list.append(cw_set_date)
 
         # Confined Water Switches
@@ -1757,6 +1847,9 @@ class MainUI(customtkinter.CTk):
         self.knowledge_development_frame.grid(row=0, column=1, rowspan=2, padx=20, pady=10, sticky="nsew", columnspan=2,
                                               ipadx=10,
                                               ipady=10)
+
+        # self.knowledge_development_frame.grid_columnconfigure(2, weight=1)
+        # self.knowledge_development_frame.grid_columnconfigure(4, weight=1)
 
         self.knowledge_development_section = tkinter.Label(self.knowledge_development_frame,
                                                            text="Knowledge Development",
@@ -1819,13 +1912,13 @@ class MainUI(customtkinter.CTk):
         for kd_s in range(7):
             kd_string = tkinter.Label(self.knowledge_development_frame, text=knowledge_development_labels[kd_s],
                                       font=STANDARD_FONT, background=theme.frame_color)
-            kd_string.grid(row=kd_s + 3, column=0, padx=(30, 0), sticky="e")
+            kd_string.grid(row=kd_s + 3, column=0, padx=(50, 0), pady=2, sticky="e")
 
         # Knowledge Development Calendar
         self.kd_cal_list = []
         for kd_c in range(7):
             kd_cal = DateEntry(self.knowledge_development_frame, selectmode="day", font=STANDARD_FONT)
-            kd_cal.grid(row=kd_c + 3, column=1, padx=5, pady=2)
+            kd_cal.grid(row=kd_c + 3, column=1, padx=7, pady=2)
             self.kd_cal_list.append(kd_cal)
 
         # Knowledge Development Set Instructor Label
@@ -1887,7 +1980,10 @@ class MainUI(customtkinter.CTk):
 
         self.kd_exam_entry_list = []
         for kd_exam in range(6):
-            kd_exam_entry = customtkinter.CTkEntry(self.knowledge_development_frame, width=70, height=25)
+            kd_exam_entry = customtkinter.CTkEntry(self.knowledge_development_frame, width=70, height=25,
+                                                   text_color=theme.text_color,
+                                                   fg_color=theme.listbox_color,
+                                                   border_color=theme.main_button_color)
             kd_exam_entry.grid(row=kd_exam + 3, column=5, columnspan=2, padx=(25, 5))
             self.kd_exam_entry_list.append(kd_exam_entry)
 
@@ -1897,9 +1993,12 @@ class MainUI(customtkinter.CTk):
                                                        corner_radius=8, bg_color=theme.background_color)
         self.open_water_frame.grid(column=1, row=2, rowspan=1, stick="nsew", padx=(20, 10), pady=10, ipadx=10, ipady=10)
 
+        # self.open_water_frame.grid_columnconfigure(4, weight=1)
+        # self.open_water_frame.grid_columnconfigure(2, weight=1)
+
         self.open_water_section = tkinter.Label(self.open_water_frame, text="Open Water", bg=theme.frame_color,
                                                 font=TITLE_HEADER_FONT)
-        self.open_water_section.grid(row=0, column=0, sticky="w", pady=10, padx=(20, 0), columnspan=2)
+        self.open_water_section.grid(row=0, column=0, sticky="w", pady=10, padx=(40, 0), columnspan=2)
 
         # Main Switch
         self.main_switch_ow = customtkinter.CTkSwitch(self.open_water_frame, text="",
@@ -1915,7 +2014,7 @@ class MainUI(customtkinter.CTk):
         for ow_s in range(16):
             ow_string = tkinter.Label(self.open_water_frame, text=open_water_labels[ow_s], font=STANDARD_FONT,
                                       background=theme.frame_color)
-            ow_string.grid(row=ow_s + 1, column=0, padx=(20, 0), sticky="e")
+            ow_string.grid(row=ow_s + 1, column=0, padx=(40, 0), sticky="e", pady=2)
 
         self.ow_cal_list = []
         for ow_c in range(16):
@@ -1934,7 +2033,7 @@ class MainUI(customtkinter.CTk):
             ow_set_inst.grid(row=ow_inst + 1, column=2, padx=20)
             self.ow_set_instructor_list.append(ow_set_inst)
 
-        # Knowledge Development Set Date Labels
+        # Open Water Set Date Labels
         self.ow_set_date_list = []
         for ow_date in range(16):
             ow_set_date = tkinter.Label(self.open_water_frame, text="Set Date", bg=theme.frame_color,
@@ -1942,7 +2041,7 @@ class MainUI(customtkinter.CTk):
             ow_set_date.grid(row=ow_date + 1, column=4)
             self.ow_set_date_list.append(ow_set_date)
 
-        # Knowledge Development Switches
+        # Open Water Switches
         self.ow_switch_list = []
         for ow_switch in range(16):
             ow_main_switch = customtkinter.CTkSwitch(self.open_water_frame, text="",
@@ -1951,7 +2050,7 @@ class MainUI(customtkinter.CTk):
                                                      button_hover_color=theme.switch_hover_color,
                                                      button_color=theme.switch_button_color
                                                      )
-            ow_main_switch.grid(row=ow_switch + 1, column=3)
+            ow_main_switch.grid(row=ow_switch + 1, column=3, padx=(15, 10))
             ow_main_switch.select()
             self.ow_switch_list.append(ow_main_switch)
 
@@ -1959,7 +2058,11 @@ class MainUI(customtkinter.CTk):
         self.ow_flex_dive_list = []
         for flex_c in range(16):
             if 3 < flex_c < 14:
-                flex_cal = customtkinter.CTkEntry(self.open_water_frame, width=40, height=15)
+                flex_cal = customtkinter.CTkEntry(self.open_water_frame, width=40, height=15,
+                                                  text_color=theme.text_color,
+                                                  fg_color=theme.listbox_color,
+                                                  border_color=theme.main_button_color)
+
                 flex_cal.grid(row=flex_c + 1, column=1, padx=5)
                 self.ow_flex_dive_list.append(flex_cal)
 
@@ -1987,7 +2090,10 @@ class MainUI(customtkinter.CTk):
                                                          fg_color=theme.background_color,
                                                          text_color=theme.text_color,
                                                          button_color=theme.main_button_color,
-                                                         button_hover_color=theme.main_button_color_hover
+                                                         button_hover_color=theme.main_button_color_hover,
+                                                         dropdown_fg_color=theme.background_color,
+                                                         dropdown_text_color=theme.text_color,
+                                                         dropdown_hover_color=theme.frame_color
                                                          )
         self.date_rule_box.grid(row=1, column=0, padx=20, pady=(0, 20), sticky="ew")
 
@@ -2057,9 +2163,9 @@ class MainUI(customtkinter.CTk):
         self.edit.add_command(label='Choose PDF Save Path',
                               command=choose_save_path
                               )
-        self.edit.add_command(label='New Template',
-                              command=new_template
-                              )
+        # self.edit.add_command(label='New Template',
+        #                       command=new_template
+        #                       )
         # - add themes in future
         # --- Settings
         # settings = Menu(menubar, tearoff=False)
@@ -2078,7 +2184,6 @@ class MainUI(customtkinter.CTk):
 
         # --- Display Menu
         self.config(menu=self.menubar)
-
 
 
 if __name__ == "__main__":

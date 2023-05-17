@@ -46,7 +46,7 @@ Use the `Set Student` `Set Instructor` and `Set Date/Dive` buttons to confirm se
 
 <br>
 <div align="center">
-<img src="assets/main_ui.png" height=600>
+<img src="assets/main_ui.png">
 </div>
 <br>
 

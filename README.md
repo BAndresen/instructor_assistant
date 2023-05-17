@@ -1,4 +1,4 @@
-# Instructor Assistant  <img src="assets/logo.png" height="75">
+# The Instructor's Assistant  <img src="assets/logo.png" height="75">
 
 A tool to help PADI Scuba Diving Instructors complete the 'Record and Referral' form.
 
@@ -11,14 +11,14 @@ A tool to help PADI Scuba Diving Instructors complete the 'Record and Referral' 
 
 "PADI® (Professional Association of Diving Instructors®) is the world’s largest ocean exploration and diver organization, operating in 186 countries and territories, with a global network of more than 6,600 dive centers and resorts and over 128,000 professional members worldwide. Issuing more than 1 million certifications each year, and with over 29 million certifications to date". https://www.padi.com/about/who-we-are
 
-PADI Scuba Diving Instructors are required to complete the 'Record_and_Referral_Form' for every student after the PADI Open Water Course. The Instructor Assistant App aims to make that process fast and easy. By hand, completing the form takes approximately 8 - 10mins per student and 1 hour for a class of 6 students. With this tool Instructors will be able to complete paperwork for a full class in less then 5 minutes. 
+PADI Scuba Diving Instructors are required to complete the 'Record_and_Referral_Form' for every student after the PADI Open Water Course. The Instructor's Assistant aims to make that process fast and easy. By hand, completing the form takes approximately 8 - 10mins per student and 1 hour for a class of 6 students. With this tool Instructors will be able to complete paperwork for a full class in less then 5 minutes. 
 
 
 # Description
 
 ### Save Instructor Details 
 
-Add, delete and save your instructor details for future use.  After your password verification, the Instructor Assistant App will automatically complete the required fields.  Keep in mind you will still need to physically sign the Instructor signature fields afterwords.  
+Add, delete and save your instructor details for future use.  After your password verification, The Instructor's Assistant will automatically complete the required fields.  Keep in mind you will still need to physically sign the Instructor signature fields afterwords.  
 
 ### Team Teaching Ready
 
@@ -51,11 +51,11 @@ Use the `Set Student` `Set Instructor` and `Set Date/Dive` buttons to confirm se
 <br>
 
 ### Choose PDF Save Path
-By default the Student Record Files will be saved to the users desktop.  To change the desired location select the Edit > Choose PDF Save Path Button to set a new save path. 
+By default the Student Record Files will be saved to the users desktop and generated everytime the `Generate PDF` button is pressed.  To change the desired location select the Edit > Choose PDF Save Path Button to set a new save path. 
 
 
 ### Importing Student Information
-Currently the Instructor Assistant App supports imports from an excel file with the following column headings.
+Currently The Instructor's Assistant supports imports from an excel file with the following column headings.
 
 ```
 'first_name' 
@@ -78,7 +78,7 @@ For the `date_of_birth` column data can be in either a `datetime` or `string` fo
 </div>
 
 ### Making a Dive Template
-The purpose of a dive template is to make date-pairs for different skills completed on the same day.  Each skill with a date has an integer code. For example, Confined Water One's code is 0.  The user can set other skill boxes to 0 to make a date-pair with Confined Water One.  After saving and selecting the template on the Main UI the user can press the `Set Template` button and the program will read the date set for Confined Water One and match each of the corresponding date-pairs.  Additionally, users can input open water flexible dive completion set points, choose course options (rdp,erdpml,computer) or toggle any section they want to leave blank. 
+The purpose of a dive template is to make date-pairs for different skills completed on the same day.  Each skill with a date has an integer code. For example, Confined Water One's code is 0.  The user can set other skill boxes to 0 to make a date-pair with Confined Water One.  After saving and selecting the template on the Main UI the user can press the `Set Template` button and the program will read the date set for Confined Water One and match each of the corresponding date-pairs.  Additionally, users can input Open Water Flexible dive completion set points, choose course options (rdp, erdpml, computer) or toggle any section they want to leave blank. 
 
 <br>
 <div align="center">

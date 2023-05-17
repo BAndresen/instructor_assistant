@@ -3,7 +3,7 @@
 A tool to help PADI Scuba Diving Instructors complete the 'Record and Referral' form.
 
 <div align="center">
-<img src="assets/Record_and_Referral_Form-1.png" height="400">
+<img src="assets/Record_and_Referral_Form-1.png" height="300">
 </div>
   
 

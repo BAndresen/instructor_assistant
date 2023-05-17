@@ -114,7 +114,7 @@ six==1.16.0
 tkcalendar==1.6.1
 tzdata==2023.3
 ```
-_Note: I tweaked a few lines from the customtkinter libary to fit the projects needs_
+_Note: I tweaked a few lines from the customtkinter library to fit the projects needs_
 
 ```
     def __init__(self,

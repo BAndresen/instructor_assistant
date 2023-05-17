@@ -1,4 +1,4 @@
-# Instructor Assistant App
+# Instructor Assistant  <img src="assets/logo.png" height="75">
 
 A tool to help PADI Scuba Diving Instructors complete the 'Record and Referral' form.
 

@@ -1,6 +1,6 @@
 # Instructor Assistant  <img src="assets/logo.png" height="75">
 
-A tool to help PADI Scuba Diving Instructors complete the 'Record_and_Referral_Form.pdf.
+A tool to help PADI Scuba Diving Instructors complete the 'Record_and_Referral_Form.pdf'
 
 <div align="center">
 <img src="assets/Record_and_Referral_Form-1.png" height="300">

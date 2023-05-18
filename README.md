@@ -82,7 +82,7 @@ The purpose of a dive template is to make date-pairs for different skills comple
 
 <br>
 <div align="center">
-<img src="assets/template_ui_screenshot.png" height=600>
+<img src="assets/template_ui_screenshot.png">
 </div>
 
 # Installation

@@ -54,7 +54,7 @@ Use the `Set Student` `Set Instructor` and `Set Date/Dive` buttons to confirm se
 By default the Student Record Files will be saved to the users desktop and generated every time the `Generate PDF` button is pressed.  To change the desired location select the Edit > Choose PDF Save Path Button to set a new save path. 
 
 
-### Importing Student Information
+### Importing Student Information Format
 Currently The Instructor's Assistant supports imports from an excel file with the following column headings.
 
 ```

@@ -1,6 +1,6 @@
 # The Instructor's Assistant  <img src="assets/logo.png" height="75">
 
-A tool to help PADI Scuba Diving Instructors complete the 'Record and Referral' form.
+A tool to help PADI Scuba Diving Instructors complete the 'Record_and_Referral.pdf' form.
 
 <div align="center">
 <img src="assets/Record_and_Referral_Form-1.png" height="300">
@@ -71,14 +71,14 @@ Currently The Instructor's Assistant supports imports from an excel file with th
 'country'
 ```
 
-For the `date_of_birth` column data can be in either a `datetime` or `string` format.  If using a string, format date *dd/mm/yyyy*.  See example "assets/openwater_diver_course_example_import.xlsx" for an example student import file.
+For the `date_of_birth` column data can be in either a `datetime` or `string` format.  If using a string, format date *dd/mm/yyyy*.  See "assets/openwater_diver_course_example_import.xlsx" for an example student import file.
 <br>
 <div align="center">
 <img src="assets/student_import_example.png">
 </div>
 
 ### Making a Dive Template
-The purpose of a dive template is to make date-pairs for different skills completed on the same day.  Each skill with a date has a unique integer code (0 - 26). For example, Confined Water One's code is 0.  The user can set other skill boxes to 0 to make a date-pair with Confined Water One.  After saving and selecting the template on the Main UI the user can press the `Set Template` button and the program will read the date for Confined Water One and match each of the corresponding date-pairs.  Additionally, users can input Open Water Flexible Dive Completions, choose course options (rdp, erdpml, computer) or toggle any section they want to leave blank. 
+The purpose of a dive template is to make date-pairs for different skills completed on the same day.  Each skill with a date has a unique integer code (0 - 27). For example, Confined Water One's code is 0.  The user can set other skill boxes to 0 to make a date-pair with Confined Water One.  After saving and selecting the template on the Main UI the user can press the `Set Template` button and the program will read the date for Confined Water One and match each of the corresponding date-pairs.  Additionally, users can input Open Water Flexible Dive Completions, choose course options (rdp, erdpml, computer) or toggle any section they want to leave blank. 
 
 <br>
 <div align="center">

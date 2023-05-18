@@ -78,7 +78,7 @@ For the `date_of_birth` column data can be in either a `datetime` or `string` fo
 </div>
 
 ### Making a Dive Template
-The purpose of a dive template is to make date-pairs for different skills completed on the same day.  Each skill with a date has an integer code. For example, Confined Water One's code is 0.  The user can set other skill boxes to 0 to make a date-pair with Confined Water One.  After saving and selecting the template on the Main UI the user can press the `Set Template` button and the program will read the date set for Confined Water One and match each of the corresponding date-pairs.  Additionally, users can input Open Water Flexible dive completion set points, choose course options (rdp, erdpml, computer) or toggle any section they want to leave blank. 
+The purpose of a dive template is to make date-pairs for different skills completed on the same day.  Each skill with a date has a unique integer code (0 - 26). For example, Confined Water One's code is 0.  The user can set other skill boxes to 0 to make a date-pair with Confined Water One.  After saving and selecting the template on the Main UI the user can press the `Set Template` button and the program will read the date for Confined Water One and match each of the corresponding date-pairs.  Additionally, users can input Open Water Flexible Dive Completions, choose course options (rdp, erdpml, computer) or toggle any section they want to leave blank. 
 
 <br>
 <div align="center">
@@ -88,12 +88,12 @@ The purpose of a dive template is to make date-pairs for different skills comple
 # Installation
 
 ### Windows Installer
-On the Release section of this repository there is a Windows Installer users can download.  Currently with version 0.1.0, this program is setup up to run on the local users directory and can be downloaded to `C:\Users\<username>\AppData\Local\instructors_assistant`.  A Desktop and Startmenu shortcut is included as well as an Uninstaller.  
+On the Releases section of this repository there is a Windows Installer users can download.  Currently with version 0.1.0, this program is setup up to run on the local users directory and can be downloaded to `C:\Users\<username>\AppData\Local\instructors_assistant`.  A Desktop and Startmenu shortcut is included as well as an Uninstaller.  
 
 _Note: The Windows Installer doesn't have a Windows Publisher's Certificate which may prompt warnings during install.  Included on the Release page is a SHA-256 hash digest of the Installer if a user wants to verify data integrity._
 
 ### Source Code
-The Instructor's Assistant is written in Python. Users can download and run the source code directly on there machine if they wish. Below is a list of required libraries for this project.
+The Instructor's Assistant is written in Python. Users can download and run the source code directly on there machine. Below is a list of required libraries for this project.
 
 ```
 Babel==2.12.1

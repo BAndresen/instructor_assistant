@@ -1,4 +1,4 @@
-# The Instructor's Assistant  <img src="assets/logo.png" height="75">
+# Instructor Assistant  <img src="assets/logo.png" height="75">
 
 A tool to help PADI Scuba Diving Instructors complete the 'Record_and_Referral_Form.pdf.
 

@@ -93,7 +93,7 @@ On the <a href = "https://github.com/BAndresen/instructor_assistant/releases">Re
 _Note: The Windows Installer doesn't have a Windows Publisher's Certificate which may prompt warnings during install about an unknown publisher.  Included on the Release page is a SHA-256 hash digest of the Installer if a user wants to verify data integrity._
 
 ### Source Code
-The Instructor's Assistant is written in Python. Users can download and run the source code directly on there machine. Below is a list of required libraries for this project.
+The Instructor's Assistant is written in Python. Users can download and run the source code directly on their machine. Below is a list of required libraries for this project.
 
 ```
 Babel==2.12.1

@@ -1,6 +1,6 @@
 # Instructor Assistant  <img src="assets/logo.png" height="75">
 
-A tool to help PADI Scuba Diving Instructors complete the 'Record_and_Referral_Form.pdf.
+A tool to help PADI Scuba Diving Instructors complete the 'Record_and_Referral_Form.pdf'
 
 <div align="center">
 <img src="assets/Record_and_Referral_Form-1.png" height="300">
@@ -88,12 +88,12 @@ The purpose of a dive template is to make date-pairs for different skills comple
 # Installation
 
 ### Windows Installer
-On the Releases section of this repository there is a Windows Installer users can download.  Currently with version 0.1.0, this program is setup up to run on the local users directory and can be downloaded to `C:\Users\<username>\AppData\Local\instructor_assistant`.  A Desktop and Startmenu shortcut is included as well as an Uninstaller.  
+On the <a href = "https://github.com/BAndresen/instructor_assistant/releases">Releases</a> section of this repository there is a Windows Installer users can download.  Currently with version 0.1.0, this program is setup up to run on the local users directory and can be downloaded to `C:\Users\<username>\AppData\Local\instructor_assistant`.  A Desktop and Startmenu shortcut is included as well as an Uninstaller.  
 
 _Note: The Windows Installer doesn't have a Windows Publisher's Certificate which may prompt warnings during install about an unknown publisher.  Included on the Release page is a SHA-256 hash digest of the Installer if a user wants to verify data integrity._
 
 ### Source Code
-The Instructor's Assistant is written in Python. Users can download and run the source code directly on there machine. Below is a list of required libraries for this project.
+The Instructor's Assistant is written in Python. Users can download and run the source code directly on their machine. Below is a list of required libraries for this project.
 
 ```
 Babel==2.12.1

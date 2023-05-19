@@ -2,10 +2,18 @@
 
 A tool to help PADI Scuba Diving Instructors complete the 'Record_and_Referral_Form.pdf'
 
+
+<br>
 <div align="center">
+<img src="assets/screengif.gif">
+</div>
+<br>
+
+
+<!--<div align="center">
 <img src="assets/Record_and_Referral_Form-1.png" height="300">
 </div>
-  
+!-->  
 
 # Overview
 
@@ -16,6 +24,10 @@ PADI Scuba Diving Instructors are required to complete the 'Record_and_Referral_
 
 # Description
 
+### Video Overview
+
+ <a href="https://www.youtube.com/watch?v=iBsUgPMyw_k"><img src = "assets/youtube_screenshot.png"></a>
+
 ### Save Instructor Details 
 
 Add, delete and save your instructor details for future use.  After your password verification, The Instructor's Assistant will automatically complete the required fields.  Keep in mind you will still need to physically sign the Instructor signature fields afterwords.  
@@ -24,13 +36,7 @@ Add, delete and save your instructor details for future use.  After your passwor
 
 The user interface allows you to easily toggle single or entire sections on or off.  Toggle off the Ocean Dive section with one click for Ocean Referrals for example.  Any item in the off position will be unaffected when the `Set Date/Dive` or `Set Instructor` button is clicked.  When team teaching, use this method to separate Instructor teaching assignments and produce a Record and Referral form with multiple Instructors.  
 
-<br>
-<br>
-<div align="center">
-<img src="assets/screengif.gif">
-</div>
-<br>
-<br>
+
 
 ### Use Dive Templates
 

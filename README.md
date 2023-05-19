@@ -24,7 +24,7 @@ PADI Scuba Diving Instructors are required to complete the 'Record_and_Referral_
 
 # Description
 
-### Video Overview
+### Youtube Video Overview
 
  <a href="https://www.youtube.com/watch?v=iBsUgPMyw_k"><img src = "assets/youtube_screenshot.png"></a>
 

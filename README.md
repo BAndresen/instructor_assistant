@@ -19,7 +19,7 @@ A tool to help PADI Scuba Diving Instructors complete the 'Record_and_Referral_F
 
 "PADI® (Professional Association of Diving Instructors®) is the world’s largest ocean exploration and diver organization, operating in 186 countries and territories, with a global network of more than 6,600 dive centers and resorts and over 128,000 professional members worldwide. Issuing more than 1 million certifications each year, and with over 29 million certifications to date". https://www.padi.com/about/who-we-are
 
-PADI Scuba Diving Instructors are required to complete the 'Record_and_Referral_Form.pdf' for every student after the PADI Open Water Course. The Instructor's Assistant aims to make that process fast and easy. By hand, completing the form takes approximately 8 - 10mins per student and 1 hour for a class of 6 students. With this tool Instructors will be able to complete paperwork for a full class in less then 5 minutes. A typical dive shop conducting 120 Open Water Certificates a year would save two full work days worth of time. 
+PADI Scuba Diving Instructors are required to complete the 'Record_and_Referral_Form.pdf' for every student after the PADI Open Water Course. The Instructor's Assistant aims to make that process fast and easy. 
 
 
 # Description
@@ -40,7 +40,10 @@ The user interface allows you to easily toggle single or entire sections on or o
 
 ### Use Dive Templates
 
-Create and customize templates to complete even faster.  Each Instructor has a unique way of conducting the PADI Open Water Course and often repeats parts of the course schedule.  For example, for the Confined Water One dive an Instructor may also complete Knowledge Review Section One, 200m swim and the 10min float on the same day.  Dive Templates allow you to save these matching date pairs so you only need to complete the Confined Water One field date.  After pressing the "Set Template" button the subsequent date pairs will be updated.
+Instructors often complete a number of tasks during the same session.  Templates allow Instructors to save these methods to make completing the form even faster. 
+###### Example:
+###### For “Confined Water One” an Instructor also completes “Knowledge Review Section One”, “200m Swim” and the “10min float” on the same day as a standard practice.  After making a template with this parameter, an instructor can deploy the template which will read the date input from “Confined Water One” and automatically update the input dates for “Knowledge Review Section One” and “200 Swim” and “10 minute float”
+
 
 ### Import Student Information
 Save time and with the option to import bulk student information from a course roster excel file.  

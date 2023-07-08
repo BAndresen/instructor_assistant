@@ -19,8 +19,7 @@ A tool to help PADI Scuba Diving Instructors complete the 'Record_and_Referral_F
 
 "PADI® (Professional Association of Diving Instructors®) is the world’s largest ocean exploration and diver organization, operating in 186 countries and territories, with a global network of more than 6,600 dive centers and resorts and over 128,000 professional members worldwide. Issuing more than 1 million certifications each year, and with over 29 million certifications to date". https://www.padi.com/about/who-we-are
 
-PADI Scuba Diving Instructors are required to complete the 'Record_and_Referral_Form.pdf' for every student after the PADI Open Water Course. The Instructor's Assistant aims to make that process fast and easy. 
-
+The Instructor's Assistant is a user-friendly tool tailored exclusively for PADI Instructors. With its intuitive interface and streamlined functionality, it empowers instructors to effortlessly and efficiently complete the PADI Open Water Student Completion form. Developed as an open-source Windows desktop application, it leverages the power of the Python programming language to provide a seamless experience for instructors in fulfilling their paperwork requirements.
 
 # Description
 

@@ -105,7 +105,7 @@ The Instructor's Assistant is written in Python. Users can download and run the 
 
 ```
 Babel==2.12.1
-customtkinter==5.1.3
+customtkinter==5.2.0
 darkdetect==0.8.0
 et-xmlfile==1.1.0
 fillpdf==0.7.2

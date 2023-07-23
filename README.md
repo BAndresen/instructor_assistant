@@ -125,12 +125,6 @@ tzdata==2023.3
 _Note: I tweaked a few lines from the customtkinter library to fit the projects needs_
 
 ```
-    def __init__(self,
-                 master: any,
-                 width: int = 65,  # <--  Line 20 from ctk.switch module changed width to 65 from 100
-                 height: int = 24,
- ```
-```
     def get(self):  # <-- Line 338 from the ctk.entry module commented out the IF/Else statement. 
 #        if self._placeholder_text_active:
 #            return ""

@@ -15,7 +15,6 @@ import hashlib
 import secrets
 import customtkinter
 # I modified ctk.entry.py line 388 def get() to only return entry.get().
-# I modified ctk.switch line 20 def __init__ width to 65
 import pandas
 import configparser
 import webbrowser
@@ -23,8 +22,6 @@ import webbrowser
 from tkcalendar import DateEntry
 from fillpdf import fillpdfs
 from tkinter import Toplevel, Menu, messagebox, filedialog, PhotoImage
-
-# TODO refactor and decouple program
 
 # Datetime
 today = datetime.datetime.today()
@@ -103,7 +100,9 @@ def new_template(ui):
     from other sections"""
     new_template_window = Toplevel(ui)
     new_template_window.config(pady=50, padx=50)
-    new_template_window.geometry("1400x1000+200+5")
+    new_template_window.geometry("1400x975+200+0")
+    new_template_window.iconbitmap("assets/logo.ico")
+
     new_template_window.grid_columnconfigure(0, weight=1)
     new_template_window.grid_columnconfigure(1, weight=1)
     new_template_window.grid_rowconfigure(0, weight=1)
@@ -178,7 +177,8 @@ def new_template(ui):
                                               fg_color=theme.master_switch_off_color,
                                               progress_color=theme.master_switch_on_color,
                                               button_color=theme.master_switch_button_color,
-                                              button_hover_color=theme.master_switch_hover_color, )
+                                              button_hover_color=theme.master_switch_hover_color,
+                                              width=65)
 
     cw_reset_switch.select()
     cw_reset_switch.grid(row=0, column=2, pady=(20, 5), padx=(0))
@@ -192,6 +192,7 @@ def new_template(ui):
                                          progress_color=theme.switch_on_color,
                                          button_color=theme.switch_button_color,
                                          button_hover_color=theme.switch_hover_color,
+                                         width=65
                                          )
         switch.grid(row=i + 1, column=2, padx=10)
         switch.select()
@@ -204,7 +205,8 @@ def new_template(ui):
                                           placeholder_text_color=theme.text_color, placeholder_text=n, height=25,
                                           text_color=theme.text_color,
                                           fg_color=theme.listbox_color,
-                                          border_color=theme.main_button_color)
+                                          border_color=theme.main_button_color,
+                                          )
 
         cw_entry.grid(row=n + 1, column=1, pady=2)
         cw_entry_list.append(cw_entry)
@@ -254,7 +256,8 @@ def new_template(ui):
                                               fg_color=theme.master_switch_off_color,
                                               progress_color=theme.master_switch_on_color,
                                               button_color=theme.master_switch_button_color,
-                                              button_hover_color=theme.master_switch_hover_color, )
+                                              button_hover_color=theme.master_switch_hover_color,
+                                              width=65)
 
     kd_reset_switch.select()
     kd_reset_switch.grid(row=0, column=2, pady=(15, 0), padx=(7, 0))
@@ -270,7 +273,8 @@ def new_template(ui):
                                          fg_color=theme.switch_off_color,
                                          progress_color=theme.switch_on_color,
                                          button_color=theme.switch_button_color,
-                                         button_hover_color=theme.switch_hover_color
+                                         button_hover_color=theme.switch_hover_color,
+                                         width=65
                                          )
         switch.grid(row=i + 1, column=2, padx=(10, 0))
         switch.select()
@@ -367,7 +371,8 @@ def new_template(ui):
                                               fg_color=theme.master_switch_off_color,
                                               progress_color=theme.master_switch_on_color,
                                               button_color=theme.master_switch_button_color,
-                                              button_hover_color=theme.master_switch_hover_color, )
+                                              button_hover_color=theme.master_switch_hover_color,
+                                              width=65)
 
     ow_reset_switch.select()
     ow_reset_switch.grid(row=0, column=2, )
@@ -384,7 +389,8 @@ def new_template(ui):
                                          fg_color=theme.switch_off_color,
                                          progress_color=theme.switch_on_color,
                                          button_color=theme.switch_button_color,
-                                         button_hover_color=theme.switch_hover_color
+                                         button_hover_color=theme.switch_hover_color,
+                                         width=65
                                          )
         switch.grid(row=i + 1, column=2, padx=10)
         switch.select()
@@ -444,22 +450,28 @@ def new_template(ui):
                                                         fg_color=theme.switch_off_color,
                                                         progress_color=theme.switch_on_color,
                                                         button_color=theme.switch_button_color,
-                                                        button_hover_color=theme.switch_hover_color
+                                                        button_hover_color=theme.switch_hover_color,
+                                                        text_color=theme.text_color,
+                                                        width=65
                                                         )
-    rdp_table_switch_set_rule.grid(row=2, column=0, pady=4)
+    rdp_table_switch_set_rule.grid(row=2, column=0, pady=4, padx=(2, 0))
 
     erdpml_switch_set_rule = customtkinter.CTkSwitch(course_option_frame, text="eRDPml",
                                                      fg_color=theme.switch_off_color,
                                                      progress_color=theme.switch_on_color,
                                                      button_color=theme.switch_button_color,
-                                                     button_hover_color=theme.switch_hover_color
+                                                     button_hover_color=theme.switch_hover_color,
+                                                     text_color=theme.text_color,
+                                                     width=65
                                                      )
-    erdpml_switch_set_rule.grid(row=4, column=0, pady=4)
+    erdpml_switch_set_rule.grid(row=4, column=0, pady=4, padx=(0, 10))
     computer_switch_set_rule = customtkinter.CTkSwitch(course_option_frame, text="Computer",
                                                        fg_color=theme.switch_off_color,
                                                        progress_color=theme.switch_on_color,
                                                        button_color=theme.switch_button_color,
-                                                       button_hover_color=theme.switch_hover_color
+                                                       button_hover_color=theme.switch_hover_color,
+                                                       text_color=theme.text_color,
+                                                       width=65
                                                        )
     computer_switch_set_rule.grid(row=5, column=0, pady=4)
 
@@ -663,6 +675,8 @@ def set_instructor(ui):
     pass_window = Toplevel(ui)
     pass_window.geometry("500x250")
     pass_window.title("Instructor Password")
+    pass_window.iconbitmap("assets/logo.ico")
+
     pass_window.config(pady=50, padx=50, background=theme.background_color)
     pass_window.grid_columnconfigure(0, weight=1)
     pass_frame = customtkinter.CTkFrame(pass_window, fg_color=theme.frame_color)
@@ -785,6 +799,7 @@ def set_instructor(ui):
             if main_ui.cw_switch_list[14].get() == 1:
                 main_ui.cw_set_instructor_list[14].config(text=inst, fg=theme.set_text_color)
                 fields["PADI"] = instructor_list[set_inst]["PADI Number"]
+
             if main_ui.kd_switch_list[0].get() == 1:
                 main_ui.kd_set_instructor_list[0].config(text=inst, fg=theme.set_text_color)
                 fields["undefined_33"] = instructor_list[set_inst]["Initials"]
@@ -1162,6 +1177,8 @@ def new_student(ui: object):
     student_window.geometry(f"{600}x{600}")
     student_window.title("Instructor Paperwork Assistant")
     student_window.config(pady=20, padx=20, background=theme.background_color)
+    student_window.iconbitmap("assets/logo.ico")
+
     student_window.grid_rowconfigure(1, weight=1)
     student_window.grid_columnconfigure(0, weight=1)
     student_frame = customtkinter.CTkFrame(student_window, fg_color=theme.frame_color)
@@ -1320,6 +1337,8 @@ def new_instructor(ui):
     instructor_window = Toplevel(ui)
     instructor_window.geometry("700x500")
     instructor_window.title("Add Instructor Information")
+    instructor_window.iconbitmap("assets/logo.ico")
+
     instructor_window.config(pady=50, padx=50, background=theme.background_color)
     instructor_window.grid_columnconfigure(0, weight=1)
 
@@ -1789,7 +1808,8 @@ class MainUI(customtkinter.CTk):
                                                       fg_color=theme.master_switch_off_color,
                                                       progress_color=theme.master_switch_on_color,
                                                       button_hover_color=theme.master_switch_hover_color,
-                                                      button_color=theme.master_switch_button_color)
+                                                      button_color=theme.master_switch_button_color,
+                                                      width=65)
         self.main_switch_cw.select()
         self.main_switch_cw.grid(row=0, column=3, columnspan=2, stick="w")
 
@@ -1802,7 +1822,7 @@ class MainUI(customtkinter.CTk):
         for cw_l in range(15):
             cw_label = tkinter.Label(self.confined_water_frame, text=confined_water_labels[cw_l], bg=theme.frame_color,
                                      font=STANDARD_FONT)
-            cw_label.grid(row=cw_l + 1, column=0, padx=(20, 0), pady=2,sticky="e")
+            cw_label.grid(row=cw_l + 1, column=0, padx=(20, 0), pady=2, sticky="e")
 
         # Confined Water Calendar
         self.cw_cal_list = []
@@ -1834,7 +1854,8 @@ class MainUI(customtkinter.CTk):
                                                      fg_color=theme.switch_off_color,
                                                      progress_color=theme.switch_on_color,
                                                      button_hover_color=theme.switch_hover_color,
-                                                     button_color=theme.switch_button_color
+                                                     button_color=theme.switch_button_color,
+                                                     width=65
                                                      )
             cw_main_switch.grid(row=cw_switch + 1, column=3)
             cw_main_switch.select()
@@ -1862,7 +1883,8 @@ class MainUI(customtkinter.CTk):
                                                       fg_color=theme.master_switch_off_color,
                                                       progress_color=theme.master_switch_on_color,
                                                       button_color=theme.master_switch_button_color,
-                                                      button_hover_color=theme.master_switch_hover_color
+                                                      button_hover_color=theme.master_switch_hover_color,
+                                                      width=65
                                                       )
         self.main_switch_kd.select()
         self.main_switch_kd.grid(row=2, column=3, )
@@ -1870,13 +1892,14 @@ class MainUI(customtkinter.CTk):
         # --- RDP or eRDPml or Computer
         self.course_option_label = tkinter.Label(self.knowledge_development_frame, text="Course Option:",
                                                  bg=theme.frame_color,
-                                                 font=STANDARD_FONT)
+                                                 font=STANDARD_FONT, )
         self.course_option_label.grid(row=1, column=3, pady=(0, 10))
         self.rdp_check = customtkinter.CTkCheckBox(self.knowledge_development_frame, text="RDP", checkbox_width=20,
                                                    checkbox_height=20,
                                                    fg_color=theme.switch_on_color,
                                                    hover_color=theme.switch_hover_color,
                                                    border_color=theme.switch_on_color,
+                                                   text_color=theme.text_color
                                                    )
 
         self.rdp_check.grid(row=1, column=5, pady=(0, 10))
@@ -1887,6 +1910,7 @@ class MainUI(customtkinter.CTk):
                                                       fg_color=theme.switch_on_color,
                                                       hover_color=theme.switch_hover_color,
                                                       border_color=theme.switch_on_color,
+                                                      text_color=theme.text_color
                                                       )
         self.erdpml_check.grid(row=1, column=6, pady=(0, 10))
 
@@ -1896,6 +1920,7 @@ class MainUI(customtkinter.CTk):
                                                         fg_color=theme.switch_on_color,
                                                         hover_color=theme.switch_hover_color,
                                                         border_color=theme.switch_on_color,
+                                                        text_color=theme.text_color
                                                         )
         self.computer_check.grid(row=1, column=7, pady=(0, 10))
         self.kr_complete = tkinter.Label(self.knowledge_development_frame, text="Knowledge", bg=theme.frame_color,
@@ -1944,7 +1969,8 @@ class MainUI(customtkinter.CTk):
                                                      fg_color=theme.switch_off_color,
                                                      progress_color=theme.switch_on_color,
                                                      button_hover_color=theme.switch_hover_color,
-                                                     button_color=theme.switch_button_color
+                                                     button_color=theme.switch_button_color,
+                                                     width=65
                                                      )
             kd_main_switch.grid(row=kd_switch + 3, column=3)
             kd_main_switch.select()
@@ -2006,7 +2032,8 @@ class MainUI(customtkinter.CTk):
                                                       fg_color=theme.master_switch_off_color,
                                                       progress_color=theme.master_switch_on_color,
                                                       button_color=theme.master_switch_button_color,
-                                                      button_hover_color=theme.master_switch_hover_color
+                                                      button_hover_color=theme.master_switch_hover_color,
+                                                      width=65
                                                       )
         self.main_switch_ow.select()
         self.main_switch_ow.grid(row=0, column=3, columnspan=1)
@@ -2048,7 +2075,8 @@ class MainUI(customtkinter.CTk):
                                                      fg_color=theme.switch_off_color,
                                                      progress_color=theme.switch_on_color,
                                                      button_hover_color=theme.switch_hover_color,
-                                                     button_color=theme.switch_button_color
+                                                     button_color=theme.switch_button_color,
+                                                     width=65
                                                      )
             ow_main_switch.grid(row=ow_switch + 1, column=3, padx=(15, 10))
             ow_main_switch.select()

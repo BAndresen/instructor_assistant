@@ -122,16 +122,7 @@ six==1.16.0
 tkcalendar==1.6.1
 tzdata==2023.3
 ```
-_Note: I tweaked a few lines from the customtkinter library to fit the projects needs_
 
-```
-    def get(self):  # <-- Line 338 from the ctk.entry module commented out the IF/Else statement. 
-#        if self._placeholder_text_active:
-#            return ""
-#        else:
-            return self._entry.get()
-```
-    
 # Contact Me
 I hope to continue to develop this tool for the scuba community as I learn more. Please don't hesitate to reach out with any issues or feedback.  brendan.development@pm.me
 

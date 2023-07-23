@@ -5,7 +5,7 @@ Author: Brendan Andresen <brendan.development@pm.me>
 Created: May 6th, 2023
 """
 
-__version__ = "0.1.0"
+__version__ = "1.0.0"
 
 import datetime
 import os
@@ -14,7 +14,6 @@ import json
 import hashlib
 import secrets
 import customtkinter
-# I modified ctk.entry.py line 388 def get() to only return entry.get().
 import pandas
 import configparser
 import webbrowser
@@ -1071,6 +1070,9 @@ def set_date():
         fields["undefined_83"] = ow4_date.year
 
     # --- Open Water Flexible Skills
+    for entry_box_num in range(len(main_ui.ow_flex_dive_list)):  # this is a fix to get placeholder text
+        main_ui.ow_flex_dive_list[entry_box_num]._placeholder_text_active = False
+
     if main_ui.ow_switch_list[4].get() == 1:
         main_ui.ow_set_date_list[4].config(text=main_ui.ow_flex_dive_list[0].get(), fg=theme.set_text_color)
         fields["Dive_9"] = main_ui.ow_flex_dive_list[0].get()
@@ -1153,6 +1155,10 @@ def generate_pdf(input_path: str):
         fields["Check Box36"] = "Yes"
 
     # --- Get string inputs from Knowledge Development Entries and update 'fields' dictionary
+
+    for entry_box_num in range(len(main_ui.kd_exam_entry_list)): # this is a fix to get placeholder text
+        main_ui.kd_exam_entry_list[entry_box_num]._placeholder_text_active = False
+
     fields["undefined_32"] = main_ui.kd_exam_entry_list[0].get()
     fields["undefined_38"] = main_ui.kd_exam_entry_list[1].get()
     fields["undefined_44"] = main_ui.kd_exam_entry_list[2].get()
@@ -2009,7 +2015,8 @@ class MainUI(customtkinter.CTk):
             kd_exam_entry = customtkinter.CTkEntry(self.knowledge_development_frame, width=70, height=25,
                                                    text_color=theme.text_color,
                                                    fg_color=theme.listbox_color,
-                                                   border_color=theme.main_button_color)
+                                                   border_color=theme.main_button_color,
+                                                   )
             kd_exam_entry.grid(row=kd_exam + 3, column=5, columnspan=2, padx=(25, 5))
             self.kd_exam_entry_list.append(kd_exam_entry)
 

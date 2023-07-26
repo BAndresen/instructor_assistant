@@ -20,7 +20,7 @@ import webbrowser
 
 from tkcalendar import DateEntry
 from fillpdf import fillpdfs
-from tkinter import Toplevel, Menu, messagebox, filedialog, PhotoImage
+from tkinter import Toplevel, Menu, messagebox, filedialog
 
 # Datetime
 today = datetime.datetime.today()

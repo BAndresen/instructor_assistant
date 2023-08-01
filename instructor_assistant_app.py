@@ -5,6 +5,7 @@ Author: Brendan Andresen <brendan.development@pm.me>
 Created: May 6th, 2023
 """
 
+
 __version__ = "1.0.0"
 
 import datetime
@@ -27,7 +28,6 @@ from dataclasses import dataclass
 today = datetime.datetime.today()
 
 # Constants
-
 path = os.getcwd()
 
 UI_SETUP_LABELS = f"{path}\\config\\ui_setup_labels.json"
@@ -46,6 +46,7 @@ DIVE_TEMPLATE_DATA = f"{path}\\config\\dive_template_data.json"
 # Student Information Global Dictionary
 student_dict_global = {}
 
+student-class-refactor
 
 @dataclass
 class Student:

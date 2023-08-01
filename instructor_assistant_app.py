@@ -22,6 +22,7 @@ import webbrowser
 from tkcalendar import DateEntry
 from fillpdf import fillpdfs
 from tkinter import Toplevel, Menu, messagebox, filedialog
+from dataclasses import dataclass
 
 # Datetime
 today = datetime.datetime.today()
@@ -44,6 +45,23 @@ DIVE_TEMPLATE_DATA = f"{path}\\config\\dive_template_data.json"
 
 # Student Information Global Dictionary
 student_dict_global = {}
+
+student-class-refactor
+
+@dataclass
+class Student:
+    first_name: str
+    last_name: str
+    date_of_birth: str
+    sex: str
+    phone: str
+    email: str
+    street_address: str
+    city: str
+    province: str
+    postal: str
+    country: str
+
 
 # --------------------------- THEME --------------------------------- #
 
@@ -1155,7 +1173,7 @@ def generate_pdf(input_path: str):
 
     # --- Get string inputs from Knowledge Development Entries and update 'fields' dictionary
 
-    for entry_box_num in range(len(main_ui.kd_exam_entry_list)): # this is a fix to get placeholder text
+    for entry_box_num in range(len(main_ui.kd_exam_entry_list)):  # this is a fix to get placeholder text
         main_ui.kd_exam_entry_list[entry_box_num]._placeholder_text_active = False
 
     fields["undefined_32"] = main_ui.kd_exam_entry_list[0].get()
@@ -1645,6 +1663,41 @@ def import_student():
             main_ui.list_box_student.insert("end", full_name)
     except KeyError:
         messagebox.showerror(message="incorrect file format.  See help 'importing student data")
+
+    # TODO complete student dataclass refactor
+    # student data class refactor
+
+    try:
+        student_dataclass_list = []
+        for info in student_dict:
+            imported_student_data = Student(
+                first_name=info['first_name'],
+                last_name=info['last_name'],
+                date_of_birth=info["date_of_birth"],
+                sex=info['sex'],
+                phone=info['phone'],
+                email=info['email'],
+                street_address=info['street_address'],
+                city=info['city'],
+                province=info['province'],
+                postal=info['postal'],
+                country=info['country'],
+            )
+            student_dataclass_list.append(imported_student_data)
+        for students in student_dataclass_list:
+            print(students.first_name)
+            print(students.last_name)
+            print(students.date_of_birth)
+            print(students.sex)
+            print(students.phone)
+            print(students.email)
+            print(students.street_address)
+            print(students.city)
+            print(students.province)
+            print(students.postal)
+            print(students.country)
+    except Exception as e:
+        print(e)
 
 
 def refresher_main_combobox():

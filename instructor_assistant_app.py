@@ -46,7 +46,6 @@ DIVE_TEMPLATE_DATA = f"{path}\\config\\dive_template_data.json"
 # Student Information Global Dictionary
 student_dict_global = {}
 
-student-class-refactor
 
 @dataclass
 class Student:
@@ -1641,28 +1640,28 @@ def import_student():
 
     student_dict = student_data.to_dict(orient="records")
 
-    try:
-        for info in student_dict:
-            full_name = f"{info['first_name']} {info['last_name']}"
-            new_student_data = {
-                full_name: {
-                    'first_name': info['first_name'],
-                    'last_name': info['last_name'],
-                    'date_of_birth': info["date_of_birth"],
-                    'sex': info['sex'],
-                    'phone': info['phone'],
-                    'email': info['email'],
-                    'street_address': info['street_address'],
-                    'city': info['city'],
-                    'province': info['province'],
-                    'postal': info['postal'],
-                    'country': info['country'],
-                }
-            }
-            student_dict_global.update(new_student_data)
-            main_ui.list_box_student.insert("end", full_name)
-    except KeyError:
-        messagebox.showerror(message="incorrect file format.  See help 'importing student data")
+    # try:
+    #     for info in student_dict:
+    #         full_name = f"{info['first_name']} {info['last_name']}"
+    #         new_student_data = {
+    #             full_name: {
+    #                 'first_name': info['first_name'],
+    #                 'last_name': info['last_name'],
+    #                 'date_of_birth': info["date_of_birth"],
+    #                 'sex': info['sex'],
+    #                 'phone': info['phone'],
+    #                 'email': info['email'],
+    #                 'street_address': info['street_address'],
+    #                 'city': info['city'],
+    #                 'province': info['province'],
+    #                 'postal': info['postal'],
+    #                 'country': info['country'],
+    #             }
+    #         }
+    #         student_dict_global.update(new_student_data)
+    #         main_ui.list_box_student.insert("end", full_name)
+    # except KeyError:
+    #     messagebox.showerror(message="incorrect file format.  See help 'importing student data")
 
     # TODO complete student dataclass refactor
     # student data class refactor
@@ -1684,18 +1683,22 @@ def import_student():
                 country=info['country'],
             )
             student_dataclass_list.append(imported_student_data)
-        for students in student_dataclass_list:
-            print(students.first_name)
-            print(students.last_name)
-            print(students.date_of_birth)
-            print(students.sex)
-            print(students.phone)
-            print(students.email)
-            print(students.street_address)
-            print(students.city)
-            print(students.province)
-            print(students.postal)
-            print(students.country)
+            main_ui.list_box_student.insert("end", f"{imported_student_data.first_name} "
+                                                   f"{imported_student_data.last_name}")
+
+        # for students in student_dataclass_list:
+        #     print(students.first_name)
+        #     print(students.last_name)
+        #     print(students.date_of_birth)
+        #     print(students.sex)
+        #     print(students.phone)
+        #     print(students.email)
+        #     print(students.street_address)
+        #     print(students.city)
+        #     print(students.province)
+        #     print(students.postal)
+        #     print(students.country)
+
     except Exception as e:
         print(e)
 

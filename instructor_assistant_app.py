@@ -46,7 +46,6 @@ DIVE_TEMPLATE_DATA = f"{path}\\config\\dive_template_data.json"
 # Student Information Global Dictionary
 student_dict_global = {}
 
-student-class-refactor
 
 @dataclass
 class Student:

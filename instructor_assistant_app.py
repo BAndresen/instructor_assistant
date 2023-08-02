@@ -5,7 +5,6 @@ Author: Brendan Andresen <brendan.development@pm.me>
 Created: May 6th, 2023
 """
 
-
 __version__ = "1.0.0"
 
 import datetime
@@ -1327,16 +1326,36 @@ def new_student(ui: object):
             }
         }
 
-        main_ui.list_box_student.insert("end", f"{student_f_name_entry.get()} {student_l_name_entry.get()}")
+        # add student class
 
-        student_dict_global.update(new_student_data)
+        add_new_student = Student(
+            first_name=student_f_name_entry.get(),
+            last_name=student_l_name_entry.get(),
+            date_of_birth=dob_entry.get(),
+            sex=sex,
+            phone=student_phone_entry.get(),
+            email=student_email_entry.get(),
+            street_address=street_entry.get(),
+            city=city_entry.get(),
+            province=province_entry.get(),
+            country=country_entry.get(),
+            postal=postal_entry.get(),
+
+        )
+
+        # main_ui.list_box_student.insert("end", f"{student_f_name_entry.get()} {student_l_name_entry.get()}")
+        main_ui.list_box_student.insert("end", f"{add_new_student.first_name} {add_new_student.last_name}")
+
+        # student_dict_global.update(new_student_data)
         student_window.destroy()
 
     # --- Add Student Button
+
     student_button = customtkinter.CTkButton(student_frame, text="Add Student", command=update_student,
                                              fg_color=theme.main_button_color, text_color=theme.main_button_text_color,
                                              hover_color=theme.main_button_color_hover
                                              )
+
     student_button.grid(column=2, row=13, columnspan=3, sticky="e", pady=30, padx=30)
 
 

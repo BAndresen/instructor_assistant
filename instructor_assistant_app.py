@@ -1314,25 +1314,6 @@ def new_student(ui: object):
         else:
             sex = ""
 
-        # global student_dict_global
-        # new_student_data = {
-        #     f"{student_f_name_entry.get()} {student_l_name_entry.get()}": {
-        #         "first_name": student_f_name_entry.get(),
-        #         "last_name": student_l_name_entry.get(),
-        #         "date_of_birth": dob_entry.get(),
-        #         "sex": sex,
-        #         "phone": student_phone_entry.get(),
-        #         "email": student_email_entry.get(),
-        #         "street_address": street_entry.get(),
-        #         "city": city_entry.get(),
-        #         "province": province_entry.get(),
-        #         "country": country_entry.get(),
-        #         "postal": postal_entry.get(),
-        #     }
-        # }
-
-        # add student class
-
         add_new_student = Student(
             first_name=student_f_name_entry.get(),
             last_name=student_l_name_entry.get(),
@@ -1347,9 +1328,9 @@ def new_student(ui: object):
             postal=postal_entry.get(),
 
         )
-
         # main_ui.list_box_student.insert("end", f"{student_f_name_entry.get()} {student_l_name_entry.get()}")
         main_ui.list_box_student.insert("end", f"{add_new_student.first_name} {add_new_student.last_name}")
+        student_group.student_list.append(add_new_student)
 
         # student_dict_global.update(new_student_data)
         student_window.destroy()
@@ -1527,21 +1508,31 @@ def remove_inst(deleted_instructor):
 
 def set_student():
     """Update 'fields' dictionary and "Set Instructor" label with student info."""
+
     index = main_ui.list_box_student.curselection()
-    global student_dict_global
-    student = main_ui.list_box_student.get(index)
-    main_ui.student_set_label.configure(text=student, fg=theme.set_text_color)
-    fields["Student Name"] = student
+    user_student = main_ui.list_box_student.get(index)
+    main_ui.student_set_label.configure(text=user_student, fg=theme.set_text_color)
+
+    student = ''
+    # find selected student from listbox
+    for select_student in student_group.student_list:
+        f_name = select_student.first_name
+        l_name = select_student.last_name
+        if f'{f_name} {l_name}' == user_student:
+            print(select_student)
+            student = select_student
+
+    fields["Student Name"] = f'{student.first_name} {student.last_name}'
 
     try:
-        if isinstance(student_dict_global[student]["date_of_birth"], str):
-            date_of_birth = student_dict_global[student]["date_of_birth"].split("/")
+        if isinstance(student.date_of_birth, str):
+            date_of_birth = student.date_of_birth.split("/")
             fields["Birth Date"] = date_of_birth[0]
             fields["undefined"] = date_of_birth[1]
             fields["undefined_2"] = date_of_birth[2]
 
-        elif isinstance(student_dict_global[student]["date_of_birth"], datetime.datetime):
-            date_of_birth = student_dict_global[student]["date_of_birth"]
+        elif isinstance(student.date_of_birth, datetime.datetime):
+            date_of_birth = student.date_of_birth
             fields["Birth Date"] = date_of_birth.day
             fields["undefined"] = date_of_birth.month
             fields["undefined_2"] = date_of_birth.year
@@ -1549,66 +1540,23 @@ def set_student():
     except KeyError:
         print("No Birth Date")
 
-    if student_dict_global[student]["sex"] == "male":
+    if student.sex == "male":
         fields["Check Box20"] = "Yes"
         fields["Check Box21"] = "No"
-    elif student_dict_global[student]["sex"] == "female":
+    elif student.sex == "female":
         fields["Check Box21"] = "Yes"
         fields["Check Box20"] = "No"
 
-    fields["Mailing address 1"] = student_dict_global[student]["street_address"]
-    fields["Mailing address 2"] = student_dict_global[student]["city"]
-    fields["Mailing address 3"] = student_dict_global[student]["province"]
+    fields["Mailing address 1"] = student.street_address
+    fields["Mailing address 2"] = student.city
+    fields["Mailing address 3"] = student.province
     try:
-        fields["Mailing address 4"] = student_dict_global[student]["country"]
+        fields["Mailing address 4"] = student.country
     except IndexError:
         print("No Country")
-    fields["Mailing address 5"] = student_dict_global[student]["postal"]
-    fields["undefined_4"] = student_dict_global[student]["phone"]
-    fields["Email"] = student_dict_global[student]["email"]
-
-
-    # TODO student class refactor
-
-
-    student = main_ui.list_box_student.get(index)
-    main_ui.student_set_label.configure(text=student, fg=theme.set_text_color)
-    fields["Student Name"] = student
-
-    try:
-        if isinstance(student_dict_global[student]["date_of_birth"], str):
-            date_of_birth = student_dict_global[student]["date_of_birth"].split("/")
-            fields["Birth Date"] = date_of_birth[0]
-            fields["undefined"] = date_of_birth[1]
-            fields["undefined_2"] = date_of_birth[2]
-
-        elif isinstance(student_dict_global[student]["date_of_birth"], datetime.datetime):
-            date_of_birth = student_dict_global[student]["date_of_birth"]
-            fields["Birth Date"] = date_of_birth.day
-            fields["undefined"] = date_of_birth.month
-            fields["undefined_2"] = date_of_birth.year
-
-    except KeyError:
-        print("No Birth Date")
-
-    if student_dict_global[student]["sex"] == "male":
-        fields["Check Box20"] = "Yes"
-        fields["Check Box21"] = "No"
-    elif student_dict_global[student]["sex"] == "female":
-        fields["Check Box21"] = "Yes"
-        fields["Check Box20"] = "No"
-
-    fields["Mailing address 1"] = student_dict_global[student]["street_address"]
-    fields["Mailing address 2"] = student_dict_global[student]["city"]
-    fields["Mailing address 3"] = student_dict_global[student]["province"]
-    try:
-        fields["Mailing address 4"] = student_dict_global[student]["country"]
-    except IndexError:
-        print("No Country")
-    fields["Mailing address 5"] = student_dict_global[student]["postal"]
-    fields["undefined_4"] = student_dict_global[student]["phone"]
-    fields["Email"] = student_dict_global[student]["email"]
-
+    fields["Mailing address 5"] = student.postal
+    fields["undefined_4"] = student.phone
+    fields["Email"] = student.email
 
 
 def select_all_cw():
@@ -1695,7 +1643,6 @@ def choose_save_path():
         config["save path"]["student_record_path"] = file_path
         with open("/config/config.ini", "w") as path:
             config.write(path)
-
 
 
 def refresher_main_combobox():

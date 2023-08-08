@@ -5,7 +5,6 @@ Author: Brendan Andresen <brendan.development@pm.me>
 Created: May 6th, 2023
 """
 
-
 __version__ = "1.0.0"
 
 import datetime
@@ -22,6 +21,7 @@ import webbrowser
 from tkcalendar import DateEntry
 from fillpdf import fillpdfs
 from tkinter import Toplevel, Menu, messagebox, filedialog
+from dataclasses import dataclass
 
 # Datetime
 today = datetime.datetime.today()
@@ -44,6 +44,27 @@ DIVE_TEMPLATE_DATA = f"{path}\\config\\dive_template_data.json"
 
 # Student Information Global Dictionary
 student_dict_global = {}
+
+
+@dataclass
+class Student:
+    first_name: str
+    last_name: str
+    date_of_birth: str
+    sex: str
+    phone: str
+    email: str
+    street_address: str
+    city: str
+    province: str
+    postal: str
+    country: str
+
+
+class StudentGroup:
+    def __init__(self):
+        self.student_list = []
+
 
 # --------------------------- THEME --------------------------------- #
 
@@ -1155,7 +1176,7 @@ def generate_pdf(input_path: str):
 
     # --- Get string inputs from Knowledge Development Entries and update 'fields' dictionary
 
-    for entry_box_num in range(len(main_ui.kd_exam_entry_list)): # this is a fix to get placeholder text
+    for entry_box_num in range(len(main_ui.kd_exam_entry_list)):  # this is a fix to get placeholder text
         main_ui.kd_exam_entry_list[entry_box_num]._placeholder_text_active = False
 
     fields["undefined_32"] = main_ui.kd_exam_entry_list[0].get()
@@ -1293,33 +1314,34 @@ def new_student(ui: object):
         else:
             sex = ""
 
-        global student_dict_global
-        new_student_data = {
-            f"{student_f_name_entry.get()} {student_l_name_entry.get()}": {
-                "first_name": student_f_name_entry.get(),
-                "last_name": student_l_name_entry.get(),
-                "date_of_birth": dob_entry.get(),
-                "sex": sex,
-                "phone": student_phone_entry.get(),
-                "email": student_email_entry.get(),
-                "street_address": street_entry.get(),
-                "city": city_entry.get(),
-                "province": province_entry.get(),
-                "country": country_entry.get(),
-                "postal": postal_entry.get(),
-            }
-        }
+        add_new_student = Student(
+            first_name=student_f_name_entry.get(),
+            last_name=student_l_name_entry.get(),
+            date_of_birth=dob_entry.get(),
+            sex=sex,
+            phone=student_phone_entry.get(),
+            email=student_email_entry.get(),
+            street_address=street_entry.get(),
+            city=city_entry.get(),
+            province=province_entry.get(),
+            country=country_entry.get(),
+            postal=postal_entry.get(),
 
-        main_ui.list_box_student.insert("end", f"{student_f_name_entry.get()} {student_l_name_entry.get()}")
+        )
+        # main_ui.list_box_student.insert("end", f"{student_f_name_entry.get()} {student_l_name_entry.get()}")
+        main_ui.list_box_student.insert("end", f"{add_new_student.first_name} {add_new_student.last_name}")
+        student_group.student_list.append(add_new_student)
 
-        student_dict_global.update(new_student_data)
+        # student_dict_global.update(new_student_data)
         student_window.destroy()
 
     # --- Add Student Button
+
     student_button = customtkinter.CTkButton(student_frame, text="Add Student", command=update_student,
                                              fg_color=theme.main_button_color, text_color=theme.main_button_text_color,
                                              hover_color=theme.main_button_color_hover
                                              )
+
     student_button.grid(column=2, row=13, columnspan=3, sticky="e", pady=30, padx=30)
 
 
@@ -1486,21 +1508,31 @@ def remove_inst(deleted_instructor):
 
 def set_student():
     """Update 'fields' dictionary and "Set Instructor" label with student info."""
+
     index = main_ui.list_box_student.curselection()
-    global student_dict_global
-    student = main_ui.list_box_student.get(index)
-    main_ui.student_set_label.configure(text=student, fg=theme.set_text_color)
-    fields["Student Name"] = student
+    user_student = main_ui.list_box_student.get(index)
+    main_ui.student_set_label.configure(text=user_student, fg=theme.set_text_color)
+
+    student = ''
+    # find selected student from listbox
+    for select_student in student_group.student_list:
+        f_name = select_student.first_name
+        l_name = select_student.last_name
+        if f'{f_name} {l_name}' == user_student:
+            print(select_student)
+            student = select_student
+
+    fields["Student Name"] = f'{student.first_name} {student.last_name}'
 
     try:
-        if isinstance(student_dict_global[student]["date_of_birth"], str):
-            date_of_birth = student_dict_global[student]["date_of_birth"].split("/")
+        if isinstance(student.date_of_birth, str):
+            date_of_birth = student.date_of_birth.split("/")
             fields["Birth Date"] = date_of_birth[0]
             fields["undefined"] = date_of_birth[1]
             fields["undefined_2"] = date_of_birth[2]
 
-        elif isinstance(student_dict_global[student]["date_of_birth"], datetime.datetime):
-            date_of_birth = student_dict_global[student]["date_of_birth"]
+        elif isinstance(student.date_of_birth, datetime.datetime):
+            date_of_birth = student.date_of_birth
             fields["Birth Date"] = date_of_birth.day
             fields["undefined"] = date_of_birth.month
             fields["undefined_2"] = date_of_birth.year
@@ -1508,23 +1540,23 @@ def set_student():
     except KeyError:
         print("No Birth Date")
 
-    if student_dict_global[student]["sex"] == "male":
+    if student.sex == "male":
         fields["Check Box20"] = "Yes"
         fields["Check Box21"] = "No"
-    elif student_dict_global[student]["sex"] == "female":
+    elif student.sex == "female":
         fields["Check Box21"] = "Yes"
         fields["Check Box20"] = "No"
 
-    fields["Mailing address 1"] = student_dict_global[student]["street_address"]
-    fields["Mailing address 2"] = student_dict_global[student]["city"]
-    fields["Mailing address 3"] = student_dict_global[student]["province"]
+    fields["Mailing address 1"] = student.street_address
+    fields["Mailing address 2"] = student.city
+    fields["Mailing address 3"] = student.province
     try:
-        fields["Mailing address 4"] = student_dict_global[student]["country"]
+        fields["Mailing address 4"] = student.country
     except IndexError:
         print("No Country")
-    fields["Mailing address 5"] = student_dict_global[student]["postal"]
-    fields["undefined_4"] = student_dict_global[student]["phone"]
-    fields["Email"] = student_dict_global[student]["email"]
+    fields["Mailing address 5"] = student.postal
+    fields["undefined_4"] = student.phone
+    fields["Email"] = student.email
 
 
 def select_all_cw():
@@ -1613,40 +1645,6 @@ def choose_save_path():
             config.write(path)
 
 
-def import_student():
-    """read excel file and import student data"""
-    student_path = filedialog.askopenfilename()
-    try:
-        student_data = pandas.read_excel(student_path)
-    except ValueError:
-        messagebox.showerror(message="wrong file type. Support for excel files only")
-
-    student_dict = student_data.to_dict(orient="records")
-
-    try:
-        for info in student_dict:
-            full_name = f"{info['first_name']} {info['last_name']}"
-            new_student_data = {
-                full_name: {
-                    'first_name': info['first_name'],
-                    'last_name': info['last_name'],
-                    'date_of_birth': info["date_of_birth"],
-                    'sex': info['sex'],
-                    'phone': info['phone'],
-                    'email': info['email'],
-                    'street_address': info['street_address'],
-                    'city': info['city'],
-                    'province': info['province'],
-                    'postal': info['postal'],
-                    'country': info['country'],
-                }
-            }
-            student_dict_global.update(new_student_data)
-            main_ui.list_box_student.insert("end", full_name)
-    except KeyError:
-        messagebox.showerror(message="incorrect file format.  See help 'importing student data")
-
-
 def refresher_main_combobox():
     with open(DIVE_TEMPLATE_DATA, "r") as data:
         template = json.load(data)
@@ -1705,7 +1703,12 @@ def report_bug():
 
 # --------------------------- MAIN UI SETUP ------------------------------ #
 class MainUI(customtkinter.CTk):
-    def __init__(self, confined_water_labels: list, knowledge_development_labels: list, open_water_labels: list, theme):
+    def __init__(self,
+                 confined_water_labels: list,
+                 knowledge_development_labels: list,
+                 open_water_labels: list,
+                 theme,
+                 student_group_list:StudentGroup):
         super().__init__()
         self.config(pady=(20), padx=30,
                     bg=theme.background_color)
@@ -1718,6 +1721,8 @@ class MainUI(customtkinter.CTk):
         self.iconbitmap("assets/logo.ico")
         # self._set_appearance_mode("system")
         # --- Student Listbox
+        self.student_group_list = student_group_list
+
         self.student_lb_frame = customtkinter.CTkFrame(master=self, fg_color=theme.frame_color, corner_radius=8,
                                                        bg_color=theme.background_color)
         self.student_lb_frame.grid(row=0, column=0, pady=10, ipadx=10, ipady=10, sticky="nsew", padx=10)
@@ -1744,7 +1749,7 @@ class MainUI(customtkinter.CTk):
                                                    hover_color=theme.main_button_color_hover)
         self.set_student.grid(row=2, column=2, padx=(0, 30))
         self.import_student = customtkinter.CTkButton(self.student_lb_frame, text="Import Student",
-                                                      command=import_student,
+                                                      command=self.import_student,
                                                       fg_color=theme.main_button_color,
                                                       text_color=theme.main_button_text_color,
                                                       hover_color=theme.main_button_color_hover)
@@ -2219,6 +2224,52 @@ class MainUI(customtkinter.CTk):
         # --- Display Menu
         self.config(menu=self.menubar)
 
+    def import_student(self):
+        """read excel file and import student data"""
+        student_path = filedialog.askopenfilename()
+        try:
+            student_data = pandas.read_excel(student_path)
+        except ValueError:
+            messagebox.showerror(message="wrong file type. Support for excel files only")
+
+        student_dict = student_data.to_dict(orient="records")
+
+        try:
+            for info in student_dict:
+                imported_student_data = Student(
+                    first_name=info['first_name'],
+                    last_name=info['last_name'],
+                    date_of_birth=info["date_of_birth"],
+                    sex=info['sex'],
+                    phone=info['phone'],
+                    email=info['email'],
+                    street_address=info['street_address'],
+                    city=info['city'],
+                    province=info['province'],
+                    postal=info['postal'],
+                    country=info['country'],
+                )
+                self.student_group_list.student_list.append(imported_student_data)
+
+                main_ui.list_box_student.insert("end", f"{imported_student_data.first_name} "
+                                                       f"{imported_student_data.last_name}")
+
+            # for students in self.student_group_list.student_list:
+            #     print(students.first_name)
+            #     print(students.last_name)
+            #     print(students.date_of_birth)
+            #     print(students.sex)
+            #     print(students.phone)
+            #     print(students.email)
+            #     print(students.street_address)
+            #     print(students.city)
+            #     print(students.province)
+            #     print(students.postal)
+            #     print(students.country)
+
+        except Exception as e:
+            print(e)
+
 
 if __name__ == "__main__":
     with open("config/themes.json", "r") as file:
@@ -2241,7 +2292,8 @@ if __name__ == "__main__":
     with open("config/pdf_form_fields.json") as data:
         fields = json.load(data)
 
+    student_group = StudentGroup()
     theme = Theme(config_theme, theme_dict)
-    main_ui = MainUI(CONFINED_WATER_LABELS, KNOWLEDGE_DEVELOPMENT_LABELS, OPEN_WATER_LABELS, theme)
+    main_ui = MainUI(CONFINED_WATER_LABELS, KNOWLEDGE_DEVELOPMENT_LABELS, OPEN_WATER_LABELS, theme, student_group)
 
     main_ui.mainloop()
